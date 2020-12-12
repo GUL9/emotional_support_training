@@ -14,4 +14,4 @@ openCV Emotion Classifier to WebApp using Flask
 
 ## Run command:
 
-`python webstreaming.py --ip 0.0.0.0 --port 8000^C`
+`python webstreaming.py --ip 0.0.0.0 --port 8000`
