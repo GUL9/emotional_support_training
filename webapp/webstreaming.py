@@ -24,7 +24,7 @@ lock = threading.Lock()
 app = Flask(__name__)
 # initialize the video stream and allow the camera sensor to
 # warmup for 2 seconds
-#vs = VideoStream(usePiCamera=1).start()
+# vs = VideoStream(usePiCamera=1).start()
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
 emotion = 'emosh'
@@ -40,7 +40,7 @@ dictgraphic = {'emosh': '🙃',
 
 @app.route("/")
 def index():
-    global emotion, emoji
+    global emotion, dictgraphic
     # return the rendered template
     return render_template("index.html", emosh=emotion, emoji=dictgraphic[emotion])
 
@@ -48,31 +48,17 @@ def index():
 def detect_emotion(frameCount):
     # grab global references to the video stream, output frame, and
     # lock variables
-    global vs, outputFrame, lock, emotion, dictgraphic
+    global vs, outputFrame, emotion
 
     # total = 0
     # loop over frames from the video stream
     while True:
-        # read the next frame from the video stream, resize it
-        frame = vs.read()
-        frame = imutils.resize(frame, width=400)
-        #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        #gray = cv2.GaussianBlur(gray, (7, 7), 0)
-        # grab the current timestamp and draw it on the frame
-        timestamp = datetime.datetime.now()
-        cv2.putText(frame, timestamp.strftime(
-            "%A %d %B %Y %I:%M:%S%p"), (10, frame.shape[0] - 10),
-            cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 0, 255), 1)
-
-        # Our operations on the frame come here
+        # Our operations on the current output frame come here
         result = DeepFace.analyze(
-            frame, actions=['emotion'], enforce_detection=False)
+            outputFrame, actions=['emotion'], enforce_detection=False)
 
         # # print(result)
-        # # emotion = result['emotion']
-        emotion = max(result['emotion'], key=result['emotion'].get)
-        with lock:
-            outputFrame = frame.copy()
+        emotion = result['emotion']
 
 
 def generate():
@@ -80,6 +66,9 @@ def generate():
     global outputFrame, lock
     # loop over frames from the output stream
     while True:
+        frame = vs.read()
+        frame = imutils.resize(frame, width=400)
+        outputFrame = frame.copy()
         # wait until the lock is acquired
         with lock:
             # check if the output frame is available, otherwise skip
@@ -131,5 +120,22 @@ if __name__ == '__main__':
     # start the flask app
     app.run(host=args["ip"], port=args["port"], debug=True,
             threaded=True, use_reloader=False)
+
+
+@app.context_processor
+def override_url_for():
+    return dict(url_for=dated_url_for)
+
+
+def dated_url_for(endpoint, **values):
+    if endpoint == 'static':
+        filename = values.get('filename', None)
+        if filename:
+            file_path = os.path.join(app.root_path,
+                                     endpoint, filename)
+            values['q'] = int(os.stat(file_path).st_mtime)
+    return url_for(endpoint, **values)
+
+
 # release the video stream pointer
 vs.stop()
