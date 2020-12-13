@@ -1,3 +1,5 @@
+# base code from Adrian Rosebrock's tutorial on Motion Detection: https://www.pyimagesearch.com/2019/09/02/opencv-stream-video-to-web-browser-html-page/
+
 # import the necessary packages
 from imutils.video import VideoStream
 from flask import Response
@@ -21,7 +23,7 @@ lock = threading.Lock()
 # initialize a flask object
 app = Flask(__name__)
 # initialize the video stream and allow the camera sensor to
-# warmup
+# warmup for 2 seconds
 #vs = VideoStream(usePiCamera=1).start()
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
@@ -47,20 +49,15 @@ def detect_emotion(frameCount):
     # grab global references to the video stream, output frame, and
     # lock variables
     global vs, outputFrame, lock, emotion, dictgraphic
-    # initialize the emotion classifier
-    faceCascade = cv2.CascadeClassifier(
-        cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
     # total = 0
-
     # loop over frames from the video stream
     while True:
-        # read the next frame from the video stream, resize it,
-        # convert the frame to grayscale, and blur it
+        # read the next frame from the video stream, resize it
         frame = vs.read()
         frame = imutils.resize(frame, width=400)
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        gray = cv2.GaussianBlur(gray, (7, 7), 0)
+        #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        #gray = cv2.GaussianBlur(gray, (7, 7), 0)
         # grab the current timestamp and draw it on the frame
         timestamp = datetime.datetime.now()
         cv2.putText(frame, timestamp.strftime(
@@ -71,10 +68,9 @@ def detect_emotion(frameCount):
         result = DeepFace.analyze(
             frame, actions=['emotion'], enforce_detection=False)
 
-        print(result)
-        # emotion = result['emotion']
+        # # print(result)
+        # # emotion = result['emotion']
         emotion = max(result['emotion'], key=result['emotion'].get)
-
         with lock:
             outputFrame = frame.copy()
 
@@ -127,7 +123,7 @@ if __name__ == '__main__':
     ap.add_argument("-f", "--frame-count", type=int, default=32,
                     help="# of frames used to construct the background model")
     args = vars(ap.parse_args())
-    # start a thread that will perform motion detection
+    # start a thread that will perform emotion detection
     t = threading.Thread(target=detect_emotion, args=(
         args["frame_count"],))
     t.daemon = True
