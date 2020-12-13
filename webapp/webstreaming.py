@@ -29,12 +29,12 @@ vs = VideoStream(src=0).start()
 time.sleep(2.0)
 emotion = 'emosh'
 dictgraphic = {'emosh': '🙃',
-               'happy': '😁',
-               'angry': '😡',
-               'sad': '☹️',
-               'neutral': '🙂',
-               'disgust': '🤢',
-               'fear': '😨',
+               'happy': '😊 😃 😄 😁 😆 😉',
+               'angry': '😤 😠 😡 🤬 😒 😣',
+               'sad': '☹️ 😢 😭 😟 😥',
+               'neutral': '🙂 😐 🧐 😑',
+               'disgust': '🤢 🤮 😣 😖',
+               'fear': '😨 😰 😥 😓',
                'surprise': '😱'}
 
 
@@ -50,6 +50,14 @@ def detect_emotion(frameCount):
     # lock variables
     global vs, outputFrame, emotion
 
+    with lock:
+        # check if the output frame is available, otherwise skip
+        # the iteration of the loop
+        if outputFrame is None:
+            frame = vs.read()
+            frame = imutils.resize(frame, width=400)
+            outputFrame = frame.copy()
+
     # total = 0
     # loop over frames from the video stream
     while True:
@@ -58,7 +66,7 @@ def detect_emotion(frameCount):
             outputFrame, actions=['emotion'], enforce_detection=False)
 
         # # print(result)
-        emotion = result['emotion']
+        emotion = max(result['emotion'], key=result['emotion'].get)
 
 
 def generate():
