@@ -28,14 +28,15 @@ app = Flask(__name__)
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
 emotion = 'emosh'
-dictgraphic = {'emosh': '🙃',
-               'happy': '😊 😃 😄 😁 😆 😉',
-               'angry': '😤 😠 😡 🤬 😒 😣',
-               'sad': '☹️ 😢 😭 😟 😥',
-               'neutral': '🙂 😐 🧐 😑',
-               'disgust': '🤢 🤮 😣 😖',
-               'fear': '😨 😰 😥 😓',
-               'surprise': '😱'}
+dictgraphic = {'emosh': ['🙃'],
+               'happy': ['😊', '😃', '😄', '😁', '😆', '😉'],
+               'angry': ['😤', '😠', '😡', '🤬', '😒', '😣'],
+               'sad': ['☹️', '😢', '😭', '😟', '😥'],
+               'neutral': ['🙂', '😐', '🧐', '😑'],
+               'disgust': ['🤢', '🤮', '😣', '😖'],
+               'fear': ['😨', '😰', '😥', '😓'],
+               'surprise': ['😱']}
+counter = 0
 
 
 @app.route("/")
@@ -43,6 +44,16 @@ def index():
     global emotion, dictgraphic
     # return the rendered template
     return render_template("index.html", emosh=emotion, emoji=dictgraphic[emotion])
+
+# background process happening without any refreshing
+
+
+@app.route('/background_process_test')
+def background_process_test():
+    global counter
+    counter += 1
+    print(counter)
+    return ("nothing")
 
 
 def detect_emotion(frameCount):

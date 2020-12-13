@@ -3,6 +3,8 @@
     <meta charset="UTF-8">
     <title>Emotion Recognition</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   </head>
   <body>
     <h1>Feeling Emosh</h1>
@@ -11,9 +13,28 @@
       
       <div class="overlay">Face {{emosh}}</div>
       <div class="overlay-voice">Voice {{emosh}}</div>
-      <div class="overlay-bar">{{emoji}}</div>
+      <div class="overlay-bar">
+        {% for em in emoji %}
+          <span id="test" value="{{loop.index}}"> {{em}} </span>
+        {% endfor %}
+      </div>
     </div>
     <a href="/response">Refresh</a>
+
+    <script type=text/javascript>
+            $(function() {
+              $('span#test').on('click', function(e) {
+                e.preventDefault()
+                $.getJSON('/background_process_test',
+                    function(data) {
+                      
+                  //do nothing
+                });
+                alert(e.target.innerHTML+' gets an upvote!');
+                return false;
+              });
+            });
+    </script>
 
   </body>
 </html>

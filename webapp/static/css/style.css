@@ -54,3 +54,12 @@
 .container:hover .overlay-bar {
   opacity: 1;
 }
+
+span {
+  display: inline-block;
+  background-color: transparent;
+}
+span:hover {
+  background-color: greenyellow;
+  cursor: pointer;
+}
