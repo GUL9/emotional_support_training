@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://cs.se/esteban/ontologies/2020/10/core"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://cs.se/esteban/ontologies/2020/10/core">
+    <Prefix name="" IRI="http://cs.se/esteban/ontologies/2020/10/core#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#physical"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#human_actor"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#virtual"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#belief"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#is_tool_in"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#mental_object"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#non_human_actor"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#physical_object"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#actor"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#Zoom_room"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#intention"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#activity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#role"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#teaching_well"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#desire"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#action"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#teaches_in"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#space"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#MC323_MIT"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#esteban"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#classroom"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#has"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#consist_of"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#object"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#human_actor"/>
+        <Class IRI="#actor"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#mental_object"/>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#object"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#non_human_actor"/>
+        <Class IRI="#actor"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#physical"/>
+        <Class IRI="#space"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#virtual"/>
+        <Class IRI="#space"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#action"/>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#activity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#activity"/>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#object"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#physical_object"/>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#object"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#role"/>
+        <Class IRI="#actor"/>
+    </SubClassOf>
+    <ClassAssertion>
+        <Class IRI="#physical"/>
+        <NamedIndividual IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#MC323_MIT"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#virtual"/>
+        <NamedIndividual IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#Zoom_room"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#physical"/>
+        <NamedIndividual IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#classroom"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#human_actor"/>
+        <NamedIndividual IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#esteban"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#belief"/>
+        <NamedIndividual IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#teaching_well"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#teaches_in"/>
+        <NamedIndividual IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#esteban"/>
+        <NamedIndividual IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#Zoom_room"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#consist_of"/>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#activity"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#has"/>
+        <Class IRI="#actor"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#is_tool_in"/>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#object"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#teaches_in"/>
+        <Class IRI="#human_actor"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#consist_of"/>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#action"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#is_tool_in"/>
+        <Class IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#activity"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#teaches_in"/>
+        <Class IRI="#space"/>
+    </ObjectPropertyRange>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+

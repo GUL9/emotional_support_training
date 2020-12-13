@@ -1,0 +1,1499 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://cs.se/esteban/ontologies/2020/10/core#"
+     xml:base="http://cs.se/esteban/ontologies/2020/10/core"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:webprotege="http://webprotege.stanford.edu/">
+    <owl:Ontology rdf:about="http://cs.se/esteban/ontologies/2020/10/core"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://webprotege.stanford.edu/R2nylBhAdS763QGoSIbZ6k -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/R2nylBhAdS763QGoSIbZ6k">
+        <rdfs:label>can_lead_to</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R4NM4KQNrQdkq7v6bIEWJh -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/R4NM4KQNrQdkq7v6bIEWJh">
+        <rdfs:label>is_expressed_by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R76S3lRKXTwzRJYO3XpbCqn -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/R76S3lRKXTwzRJYO3XpbCqn">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>interacts_with</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R77FsTLxEOfXDB0MgCo67pR -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/R77FsTLxEOfXDB0MgCo67pR">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>is_updating</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R7oUtNONk1kKN4hBlt4ZcTq -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/R7oUtNONk1kKN4hBlt4ZcTq">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>can_affect</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R83EWQgVMfXTe4nlf9bzYAn -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/R83EWQgVMfXTe4nlf9bzYAn">
+        <rdfs:label>can_record</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R8OnYZnhfdRxjUX4oWmooIH -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/R8OnYZnhfdRxjUX4oWmooIH">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://webprotege.stanford.edu/R3FzZMJs8Bbk8darvq4LRB"/>
+        <rdfs:range rdf:resource="http://webprotege.stanford.edu/RaVlC4SWmykaBwmWK9wpC3"/>
+        <rdfs:label>can_read</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R8Q9AjbFvejxE6vOP0kM7PK -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/R8Q9AjbFvejxE6vOP0kM7PK">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>is_generating</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R8RpTKmHpqXSLys1mt4qKls -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/R8RpTKmHpqXSLys1mt4qKls">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://webprotege.stanford.edu/RCUOKHEHbeSKIamgYgeqrUB"/>
+        <rdfs:range rdf:resource="http://webprotege.stanford.edu/RBg2uAcApdEc2axJIPC4tYh"/>
+        <rdfs:label>care_for</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R9C7L6UBliRP8nrfC31o5mu -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/R9C7L6UBliRP8nrfC31o5mu">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>is_going_through</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R9E4Or4Lb2LCPgwVVY7kANt -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/R9E4Or4Lb2LCPgwVVY7kANt">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>is_producing</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R9G6InXASS6V1NujaDkpFkP -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/R9G6InXASS6V1NujaDkpFkP">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>is_based_on</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R9Q89jcKSr4RK3gm235DYiw -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/R9Q89jcKSr4RK3gm235DYiw">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>has_current</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R9WMxU6WPlbNhxFGEssDHWk -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/R9WMxU6WPlbNhxFGEssDHWk">
+        <rdfs:domain rdf:resource="http://cs.se/esteban/ontologies/2020/10/core#actor"/>
+        <rdfs:range rdf:resource="http://webprotege.stanford.edu/RaVlC4SWmykaBwmWK9wpC3"/>
+        <rdfs:label>can_express</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RB0BxwervRtX24ZVTsgSxop -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RB0BxwervRtX24ZVTsgSxop">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>is_classifying</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RBTFNOZQj5JrRkLjN5XbTh3 -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RBTFNOZQj5JrRkLjN5XbTh3">
+        <rdfs:label>administered_by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RBcbf1u20GT8MqNBlG9VHC2 -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RBcbf1u20GT8MqNBlG9VHC2">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>is_expressing</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RBcoxnGSduHMZgjLnWMZ2A5 -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RBcoxnGSduHMZgjLnWMZ2A5">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://webprotege.stanford.edu/R3FzZMJs8Bbk8darvq4LRB"/>
+        <rdfs:range rdf:resource="http://webprotege.stanford.edu/RCUOKHEHbeSKIamgYgeqrUB"/>
+        <rdfs:label>is_supporting</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RBjeayYKtvnvQqbEhIKi1Dp -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RBjeayYKtvnvQqbEhIKi1Dp">
+        <rdfs:label>takes_place_in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RBoSlbgWOu7mnjBujVgGzI8 -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RBoSlbgWOu7mnjBujVgGzI8">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://webprotege.stanford.edu/R3FzZMJs8Bbk8darvq4LRB"/>
+        <rdfs:label>can_suggest</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RBy9KX0bYJa6EuxVfiymy6w -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RBy9KX0bYJa6EuxVfiymy6w">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is_displaying</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCB27q2colTFolc3rjNzjIa -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RCB27q2colTFolc3rjNzjIa">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is_supporting</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCLrSFFQnDsdF1IQIe3i30i -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RCLrSFFQnDsdF1IQIe3i30i">
+        <rdfs:label>made_by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCbG5IWDH7MbzAadNpTbKT2 -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RCbG5IWDH7MbzAadNpTbKT2">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>can_generate</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCbOvlMwtIvPP96X5iRs6A2 -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RCbOvlMwtIvPP96X5iRs6A2">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>is_performing</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCfqbL7OV5cc6Xd6iQFTG2T -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RCfqbL7OV5cc6Xd6iQFTG2T">
+        <rdfs:label>is_changing</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCzF9fv9GvoRfz9a04Yn8pF -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RCzF9fv9GvoRfz9a04Yn8pF">
+        <rdfs:label>receives</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RDCatHSwt8YsURXqzrZP4zk -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RDCatHSwt8YsURXqzrZP4zk">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>can_be</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RDKXcOVSL1JnoC7Eo8I2OWf -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RDKXcOVSL1JnoC7Eo8I2OWf">
+        <rdfs:subPropertyOf rdf:resource="http://webprotege.stanford.edu/RDkwCLDKYJgLr191a4Q82I7"/>
+        <rdfs:label>has_next</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RDMgLETAZ2wul95SMwSI6n3 -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RDMgLETAZ2wul95SMwSI6n3">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>can_apply</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RDQOCYWGT2vJ7C2J0RtbbvN -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RDQOCYWGT2vJ7C2J0RtbbvN">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>has_previous</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RDkwCLDKYJgLr191a4Q82I7 -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RDkwCLDKYJgLr191a4Q82I7">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>is_receiving</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RDwJ3IXjJRunGfvE3YPmp2J -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RDwJ3IXjJRunGfvE3YPmp2J">
+        <rdfs:label>is_representing</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RGoC3FP27ejn7sEyKdptfq -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RGoC3FP27ejn7sEyKdptfq">
+        <rdfs:label>conducted_by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/Rg9TCtW6n7RS4FwcaJeU5U -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/Rg9TCtW6n7RS4FwcaJeU5U">
+        <rdfs:label>gives</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RgvwcmwB8ReEKQiqABcN12 -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RgvwcmwB8ReEKQiqABcN12">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>tries_to_identify</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RloHaDLcwwTB3Z3mpksfvv -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RloHaDLcwwTB3Z3mpksfvv">
+        <rdfs:label>exists_in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/Ro782EQSQQyisqOA8gGaE7 -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/Ro782EQSQQyisqOA8gGaE7">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>is_generated_by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RqC5qiQpMuvVfFgAoLIG31 -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RqC5qiQpMuvVfFgAoLIG31">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>is_affected_by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/Rt4jR0vF1GCMtf9NVsC7he -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/Rt4jR0vF1GCMtf9NVsC7he">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>learn_from</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RxA1byuOsZOWuYzp0VoIKl -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RxA1byuOsZOWuYzp0VoIKl">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:label>is_monitoring</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#consist_of -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#consist_of">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#activity"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#has -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#has">
+        <rdfs:domain rdf:resource="http://cs.se/esteban/ontologies/2020/10/core#actor"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#is_tool_in -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#is_tool_in">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#object"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#activity"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://webprotege.stanford.edu/R2y5HwHyIQQP1UpV2TxEMr -->
+
+    <owl:DatatypeProperty rdf:about="http://webprotege.stanford.edu/R2y5HwHyIQQP1UpV2TxEMr">
+        <rdfs:label>has_classification</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R4Lb0PRrHFEExb0PD0FoKX -->
+
+    <owl:DatatypeProperty rdf:about="http://webprotege.stanford.edu/R4Lb0PRrHFEExb0PD0FoKX">
+        <rdfs:label>takes_place_on</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R85oHZLaObPnDVIYrgo3byP -->
+
+    <owl:DatatypeProperty rdf:about="http://webprotege.stanford.edu/R85oHZLaObPnDVIYrgo3byP">
+        <rdfs:label>belongs_to_emotion</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R8bm6GS3asp5uWoMfCZncVa -->
+
+    <owl:DatatypeProperty rdf:about="http://webprotege.stanford.edu/R8bm6GS3asp5uWoMfCZncVa">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:label>has_diagnosis</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R8kOX7vOpM5HMabhPZFVEEs -->
+
+    <owl:DatatypeProperty rdf:about="http://webprotege.stanford.edu/R8kOX7vOpM5HMabhPZFVEEs">
+        <rdfs:label>has_score</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RBBSXQnje5V3BHN7SM3KH6x -->
+
+    <owl:DatatypeProperty rdf:about="http://webprotege.stanford.edu/RBBSXQnje5V3BHN7SM3KH6x">
+        <rdfs:label>has_classification_type</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RBkpzfVCjoiRA8jeJGrM5lT -->
+
+    <owl:DatatypeProperty rdf:about="http://webprotege.stanford.edu/RBkpzfVCjoiRA8jeJGrM5lT">
+        <rdfs:label>is_chemotherapy</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCcTQFgSGH9yJjGIGmMGJKJ -->
+
+    <owl:DatatypeProperty rdf:about="http://webprotege.stanford.edu/RCcTQFgSGH9yJjGIGmMGJKJ">
+        <rdfs:label>is_ready</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RDCHgKl82rNVYMpcJw8Beaq -->
+
+    <owl:DatatypeProperty rdf:about="http://webprotege.stanford.edu/RDCHgKl82rNVYMpcJw8Beaq">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:label>has_profession</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RDCPcU9ETVSMvjsEeH2rcGn -->
+
+    <owl:DatatypeProperty rdf:about="http://webprotege.stanford.edu/RDCPcU9ETVSMvjsEeH2rcGn">
+        <rdfs:label>is_medicine</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RDWoxVT3ybPjVDvzmMKxcmh -->
+
+    <owl:DatatypeProperty rdf:about="http://webprotege.stanford.edu/RDWoxVT3ybPjVDvzmMKxcmh">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:label>has_age</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RYMUFckEIgDTImfWHOVJsq -->
+
+    <owl:DatatypeProperty rdf:about="http://webprotege.stanford.edu/RYMUFckEIgDTImfWHOVJsq">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:label>has_relationship_status</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RfKu6gPt0fNaVG6jSZ6pFr -->
+
+    <owl:DatatypeProperty rdf:about="http://webprotege.stanford.edu/RfKu6gPt0fNaVG6jSZ6pFr">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is_surgery</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://webprotege.stanford.edu/Rj2jifdF8sXqgcxfEwKwA3 -->
+
+    <owl:DatatypeProperty rdf:about="http://webprotege.stanford.edu/Rj2jifdF8sXqgcxfEwKwA3">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:label>has_frequency</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://cs.se/esteban/ontologies/2020/10/core#actor -->
+
+    <owl:Class rdf:about="http://cs.se/esteban/ontologies/2020/10/core#actor"/>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R2P9DjNesQNGQ5jAp1HzpP -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R2P9DjNesQNGQ5jAp1HzpP">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/R8B5WqauNUFhjYkqgX31W5Z"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">feedback_detected</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R3FzZMJs8Bbk8darvq4LRB -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R3FzZMJs8Bbk8darvq4LRB">
+        <rdfs:subClassOf rdf:resource="http://cs.se/esteban/ontologies/2020/10/core#actor"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R9Q89jcKSr4RK3gm235DYiw"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/R8B5WqauNUFhjYkqgX31W5Z"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/RCbOvlMwtIvPP96X5iRs6A2"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RDOpQCoHZn0YdStr4lfrSBa"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#has"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RBo6G5xj3zhBXevpEH0RwRK"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#has"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RUh5fDU50ar0LKNUTVjFyp"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#has"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RgQO2voXjNrUmj3mosqa9H"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>support_agent</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R7MHTl7i9AAdhWThwRtTIT8 -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R7MHTl7i9AAdhWThwRtTIT8">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RDBtrn41GzIoLJt5y2y1Gxo"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R85oHZLaObPnDVIYrgo3byP"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/Rj2jifdF8sXqgcxfEwKwA3"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>emoji</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R7QfdtRIVzJ24LndNoiXNU1 -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R7QfdtRIVzJ24LndNoiXNU1">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RDBtrn41GzIoLJt5y2y1Gxo"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R9G6InXASS6V1NujaDkpFkP"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RaVlC4SWmykaBwmWK9wpC3"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>classification.</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R7RE5ouQ4L6PPgxYJaafpe -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R7RE5ouQ4L6PPgxYJaafpe">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/R7jZdDQnSAjZh6oGuN6kaUF"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">angry_classification</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R7TRJKgiIiR8vUmHUXHVpW4 -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R7TRJKgiIiR8vUmHUXHVpW4">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#belief"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/RqC5qiQpMuvVfFgAoLIG31"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RBq9OmAVNCdhAjn6yGTULjA"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>caregiver_belief</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R7X1OXmw9tqoO8olD77T8ZM -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R7X1OXmw9tqoO8olD77T8ZM">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RMeEyi53N76h1crp19TqJv"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">output_dismissed</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R7grIJzS74O6ZOjMyI2JZAh -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R7grIJzS74O6ZOjMyI2JZAh">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/R7l6iXoIJZUHnywevFtAmhF"/>
+        <rdfs:label>anger</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R7jGr7s3AonWinp8Y6ABEkS -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R7jGr7s3AonWinp8Y6ABEkS">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RCRpsPiyOYGzmqSpJC3M9UN"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R9E4Or4Lb2LCPgwVVY7kANt"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RMeEyi53N76h1crp19TqJv"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R9G6InXASS6V1NujaDkpFkP"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/R8sULL36r4zfDALnzZDldTN"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">user_feedback_state</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R7jZdDQnSAjZh6oGuN6kaUF -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R7jZdDQnSAjZh6oGuN6kaUF">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/R9tMDLf04Gv5UKv4KUATmbd"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R8kOX7vOpM5HMabhPZFVEEs"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/RBBSXQnje5V3BHN7SM3KH6x"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>classification_event</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R7l6iXoIJZUHnywevFtAmhF -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R7l6iXoIJZUHnywevFtAmhF">
+        <rdfs:label>emotional_state</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R80x7Dtij1E9VTREDKGtENo -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R80x7Dtij1E9VTREDKGtENo">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/R7jZdDQnSAjZh6oGuN6kaUF"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">neutral_classification</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R8B5WqauNUFhjYkqgX31W5Z -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R8B5WqauNUFhjYkqgX31W5Z">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RC4i8S76psr774RyBSQ0hnc"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R9E4Or4Lb2LCPgwVVY7kANt"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RDOpQCoHZn0YdStr4lfrSBa"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R9G6InXASS6V1NujaDkpFkP"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RCRpsPiyOYGzmqSpJC3M9UN"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>agent_state</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R8JfNggECRipcPqaEVM8X4f -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R8JfNggECRipcPqaEVM8X4f">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RMeEyi53N76h1crp19TqJv"/>
+        <rdfs:label>emoji_selected</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R8OMPoMKTUMgunv0hSSdOZB -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R8OMPoMKTUMgunv0hSSdOZB">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RBPtqAYpYGuAvHTudOpKs6l"/>
+        <rdfs:label>voice</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R8VbvweQtGuIjQ46QWraT8E -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R8VbvweQtGuIjQ46QWraT8E">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/R7l6iXoIJZUHnywevFtAmhF"/>
+        <rdfs:label>sadness</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R8eRbXviMQ15OVZTXWXvATp -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R8eRbXviMQ15OVZTXWXvATp">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#belief"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/RqC5qiQpMuvVfFgAoLIG31"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/R9tMDLf04Gv5UKv4KUATmbd"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#consist_of"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/R7jGr7s3AonWinp8Y6ABEkS"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#consist_of"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RC3aUTfn8S1dXg6LcmV8Na0"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>support_agent_belief</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R8rIobGGNtxdhnadmXcnv4C -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R8rIobGGNtxdhnadmXcnv4C">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/R8B5WqauNUFhjYkqgX31W5Z"/>
+        <rdfs:label>ready_to_generate_output</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R8sULL36r4zfDALnzZDldTN -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R8sULL36r4zfDALnzZDldTN">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RDBtrn41GzIoLJt5y2y1Gxo"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R9G6InXASS6V1NujaDkpFkP"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/R7TRJKgiIiR8vUmHUXHVpW4"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>user_feedback</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R95sYGU8BZUoErxZqHBZgJR -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R95sYGU8BZUoErxZqHBZgJR">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RDOpQCoHZn0YdStr4lfrSBa"/>
+        <rdfs:label>hide_output</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R9RPyNTpGQK2CEn4xQQHnK2 -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R9RPyNTpGQK2CEn4xQQHnK2">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RaVlC4SWmykaBwmWK9wpC3"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/Ro782EQSQQyisqOA8gGaE7"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/R9myZZrfTzVDWghVP5ofOSR"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">facial_gesture</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R9UhVHIjWVQ9VtQmzGjGdII -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R9UhVHIjWVQ9VtQmzGjGdII">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RBPtqAYpYGuAvHTudOpKs6l"/>
+        <rdfs:label>limbs</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R9myZZrfTzVDWghVP5ofOSR -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R9myZZrfTzVDWghVP5ofOSR">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RBPtqAYpYGuAvHTudOpKs6l"/>
+        <rdfs:label>face</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R9tMDLf04Gv5UKv4KUATmbd -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R9tMDLf04Gv5UKv4KUATmbd">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#activity"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">module_event</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/R9xeTPJnNmSXgEifgDcLd5z -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R9xeTPJnNmSXgEifgDcLd5z">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RDOpQCoHZn0YdStr4lfrSBa"/>
+        <rdfs:label>update_frequency</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RBPtqAYpYGuAvHTudOpKs6l -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RBPtqAYpYGuAvHTudOpKs6l">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R9E4Or4Lb2LCPgwVVY7kANt"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RaVlC4SWmykaBwmWK9wpC3"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>body</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RBg2uAcApdEc2axJIPC4tYh -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RBg2uAcApdEc2axJIPC4tYh">
+        <rdfs:subClassOf rdf:resource="http://cs.se/esteban/ontologies/2020/10/core#actor"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#has"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/R7l6iXoIJZUHnywevFtAmhF"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#has"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RBPtqAYpYGuAvHTudOpKs6l"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>patient</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RBo6G5xj3zhBXevpEH0RwRK -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RBo6G5xj3zhBXevpEH0RwRK">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RCdxYwzPjOoMtrcjbsKD9gZ"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R9Q89jcKSr4RK3gm235DYiw"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/R7jGr7s3AonWinp8Y6ABEkS"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#has"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RC5gP8kv1Yl0d7EetAib2SA"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>user_module</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RBq9OmAVNCdhAjn6yGTULjA -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RBq9OmAVNCdhAjn6yGTULjA">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RDBtrn41GzIoLJt5y2y1Gxo"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#consist_of"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RDZFHVcmlQiDeBh6CDNrUgJ"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">support_agent_output</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RC09ne7LrmqC4GVjbHOINqE -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RC09ne7LrmqC4GVjbHOINqE">
+        <rdfs:label>information</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RC1q4dC1j8fm8zkGTAVOk2h -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RC1q4dC1j8fm8zkGTAVOk2h">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RaVlC4SWmykaBwmWK9wpC3"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/Ro782EQSQQyisqOA8gGaE7"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/R9UhVHIjWVQ9VtQmzGjGdII"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>body_gesture</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RC3aUTfn8S1dXg6LcmV8Na0 -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RC3aUTfn8S1dXg6LcmV8Na0">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RCRpsPiyOYGzmqSpJC3M9UN"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R9E4Or4Lb2LCPgwVVY7kANt"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/R7jZdDQnSAjZh6oGuN6kaUF"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R9G6InXASS6V1NujaDkpFkP"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/R7QfdtRIVzJ24LndNoiXNU1"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R2y5HwHyIQQP1UpV2TxEMr"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/RBBSXQnje5V3BHN7SM3KH6x"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/RCcTQFgSGH9yJjGIGmMGJKJ"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">classification_state</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RC4i8S76psr774RyBSQ0hnc -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RC4i8S76psr774RyBSQ0hnc">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/RDKXcOVSL1JnoC7Eo8I2OWf"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RC4i8S76psr774RyBSQ0hnc"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/RDQOCYWGT2vJ7C2J0RtbbvN"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RC4i8S76psr774RyBSQ0hnc"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>state</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RC5gP8kv1Yl0d7EetAib2SA -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RC5gP8kv1Yl0d7EetAib2SA">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RbciALu8t3ohxnFwwwmyaB"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R83EWQgVMfXTe4nlf9bzYAn"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/R8sULL36r4zfDALnzZDldTN"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>user_input_sensor</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RC6DITx3y6xutGtUAah014I -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RC6DITx3y6xutGtUAah014I">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RaVlC4SWmykaBwmWK9wpC3"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/Ro782EQSQQyisqOA8gGaE7"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/R8OMPoMKTUMgunv0hSSdOZB"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">voice_gesture</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RC9nRalPnrnIhrTMjDi2AWI -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RC9nRalPnrnIhrTMjDi2AWI">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/R7jZdDQnSAjZh6oGuN6kaUF"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sad_classification</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCRpsPiyOYGzmqSpJC3M9UN -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RCRpsPiyOYGzmqSpJC3M9UN">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RC4i8S76psr774RyBSQ0hnc"/>
+        <rdfs:label>module_state</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCUOKHEHbeSKIamgYgeqrUB -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RCUOKHEHbeSKIamgYgeqrUB">
+        <rdfs:subClassOf rdf:resource="http://cs.se/esteban/ontologies/2020/10/core#actor"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R8OnYZnhfdRxjUX4oWmooIH"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/ROwU3nRwjoyX6PonIEJpZz"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R9E4Or4Lb2LCPgwVVY7kANt"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RMeEyi53N76h1crp19TqJv"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#has"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/R7TRJKgiIiR8vUmHUXHVpW4"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>caregiver</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCW2WForigrDFoxdbXWJ83L -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RCW2WForigrDFoxdbXWJ83L">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/R7l6iXoIJZUHnywevFtAmhF"/>
+        <rdfs:label>neutral</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCaiLbSs0BqmFFDog3fE5YK -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RCaiLbSs0BqmFFDog3fE5YK">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RDOpQCoHZn0YdStr4lfrSBa"/>
+        <rdfs:label>generate_emoji_set</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCdxYwzPjOoMtrcjbsKD9gZ -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RCdxYwzPjOoMtrcjbsKD9gZ">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R9Q89jcKSr4RK3gm235DYiw"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RC4i8S76psr774RyBSQ0hnc"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">module</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCh7IbNQThPj3Xn5lSdDGY3 -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RCh7IbNQThPj3Xn5lSdDGY3">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#has"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RC5gP8kv1Yl0d7EetAib2SA"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#has"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RCpTYZviztNX0BTV76fJ3YW"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#has"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RDbCFuVNzsi7a616OwvlRvK"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#has"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/ROwU3nRwjoyX6PonIEJpZz"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>low_level</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCpTYZviztNX0BTV76fJ3YW -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RCpTYZviztNX0BTV76fJ3YW">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RbciALu8t3ohxnFwwwmyaB"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R83EWQgVMfXTe4nlf9bzYAn"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/R9RPyNTpGQK2CEn4xQQHnK2"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>video_camera</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RDBtrn41GzIoLJt5y2y1Gxo -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RDBtrn41GzIoLJt5y2y1Gxo">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#object"/>
+        <rdfs:label>virtual_object</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RDOpQCoHZn0YdStr4lfrSBa -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RDOpQCoHZn0YdStr4lfrSBa">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#activity"/>
+        <rdfs:label>agent_actions</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RDZFHVcmlQiDeBh6CDNrUgJ -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RDZFHVcmlQiDeBh6CDNrUgJ">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RDBtrn41GzIoLJt5y2y1Gxo"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#consist_of"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/R7MHTl7i9AAdhWThwRtTIT8"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">set_of_emojis</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RDbCFuVNzsi7a616OwvlRvK -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RDbCFuVNzsi7a616OwvlRvK">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RbciALu8t3ohxnFwwwmyaB"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R83EWQgVMfXTe4nlf9bzYAn"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RC6DITx3y6xutGtUAah014I"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>microphone</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RFHzmcNqKXSk6TZOZ7vA7g -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RFHzmcNqKXSk6TZOZ7vA7g">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/R7l6iXoIJZUHnywevFtAmhF"/>
+        <rdfs:label>happiness</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RMeEyi53N76h1crp19TqJv -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RMeEyi53N76h1crp19TqJv">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/R9tMDLf04Gv5UKv4KUATmbd"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">user_feedback_event</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/ROwU3nRwjoyX6PonIEJpZz -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/ROwU3nRwjoyX6PonIEJpZz">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#physical_object"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/RBy9KX0bYJa6EuxVfiymy6w"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RBq9OmAVNCdhAjn6yGTULjA"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>monitor</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RUh5fDU50ar0LKNUTVjFyp -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RUh5fDU50ar0LKNUTVjFyp">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RCdxYwzPjOoMtrcjbsKD9gZ"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R9Q89jcKSr4RK3gm235DYiw"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RC3aUTfn8S1dXg6LcmV8Na0"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#has"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RDbCFuVNzsi7a616OwvlRvK"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>voice_module</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RYG7gY4sGtyd3HTVF3dZJd -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RYG7gY4sGtyd3HTVF3dZJd">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/R8B5WqauNUFhjYkqgX31W5Z"/>
+        <rdfs:label>emotional_expressions_detected</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RZf5uW1zctQA0qoSCq8kuN -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RZf5uW1zctQA0qoSCq8kuN">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RDOpQCoHZn0YdStr4lfrSBa"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">display_output</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RaVlC4SWmykaBwmWK9wpC3 -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RaVlC4SWmykaBwmWK9wpC3">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#activity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/RBcbf1u20GT8MqNBlG9VHC2"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/R7l6iXoIJZUHnywevFtAmhF"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">patient_gesture</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RbciALu8t3ohxnFwwwmyaB -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RbciALu8t3ohxnFwwwmyaB">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#physical_object"/>
+        <rdfs:label>sensor</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/Rc9YJE4gztJYsslSkMT6Mh -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/Rc9YJE4gztJYsslSkMT6Mh">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#has"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/R3FzZMJs8Bbk8darvq4LRB"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>high_level</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RcjEHgIcBDyVjxTiH608ct -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RcjEHgIcBDyVjxTiH608ct">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RMeEyi53N76h1crp19TqJv"/>
+        <rdfs:label>output_ignored</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RdVwlNsWd7j2oj4orrmGL7 -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RdVwlNsWd7j2oj4orrmGL7">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/R7jZdDQnSAjZh6oGuN6kaUF"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">happy_classification</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RgQO2voXjNrUmj3mosqa9H -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RgQO2voXjNrUmj3mosqa9H">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RCdxYwzPjOoMtrcjbsKD9gZ"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/R9Q89jcKSr4RK3gm235DYiw"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RC3aUTfn8S1dXg6LcmV8Na0"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#has"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/RCpTYZviztNX0BTV76fJ3YW"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>face_module</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RhQTrre2jLosTIzuj6MRUq -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RhQTrre2jLosTIzuj6MRUq">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RC09ne7LrmqC4GVjbHOINqE"/>
+        <rdfs:label>sensor_information</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#activity -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#activity">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#belief -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#belief"/>
+    
+
+
+    <!-- http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#desire -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#desire"/>
+    
+
+
+    <!-- http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#intention -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#intention"/>
+    
+
+
+    <!-- http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#object -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#object"/>
+    
+
+
+    <!-- http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#physical_object -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#physical_object">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/esteban/ontologies/2020/10/untitled-ontology-47#object"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://webprotege.stanford.edu/R9tIFN6Mp2DVO7iPBLbTdlk -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/R9tIFN6Mp2DVO7iPBLbTdlk">
+        <rdf:type rdf:resource="http://webprotege.stanford.edu/R3FzZMJs8Bbk8darvq4LRB"/>
+        <webprotege:RCB27q2colTFolc3rjNzjIa rdf:resource="http://webprotege.stanford.edu/RCV89pW1vYsjHuZusB8BVwH"/>
+        <webprotege:RxA1byuOsZOWuYzp0VoIKl rdf:resource="http://webprotege.stanford.edu/RBQPqwxnJy7EDNziCDlfFfL"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">emotion-coach</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RBQPqwxnJy7EDNziCDlfFfL -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/RBQPqwxnJy7EDNziCDlfFfL">
+        <rdf:type rdf:resource="http://webprotege.stanford.edu/RBg2uAcApdEc2axJIPC4tYh"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">cancer_patient</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://webprotege.stanford.edu/RCV89pW1vYsjHuZusB8BVwH -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/RCV89pW1vYsjHuZusB8BVwH">
+        <rdf:type rdf:resource="http://webprotege.stanford.edu/RCUOKHEHbeSKIamgYgeqrUB"/>
+        <webprotege:R76S3lRKXTwzRJYO3XpbCqn rdf:resource="http://webprotege.stanford.edu/RBQPqwxnJy7EDNziCDlfFfL"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nurse joy</rdfs:label>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.13) https://github.com/owlcs/owlapi -->
+
