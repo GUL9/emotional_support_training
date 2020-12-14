@@ -228,7 +228,7 @@
                     <rdf:Description rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Emoji"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#type_of_emotion"/>
-                        <owl:hasValue>Anger</owl:hasValue>
+                        <owl:hasValue>angry</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -349,7 +349,7 @@
                     <rdf:Description rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Emoji"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#type_of_emotion"/>
-                        <owl:hasValue>happiness</owl:hasValue>
+                        <owl:hasValue>happy</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -519,7 +519,7 @@
                     <rdf:Description rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Emoji"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#type_of_emotion"/>
-                        <owl:hasValue>sadness</owl:hasValue>
+                        <owl:hasValue>sad</owl:hasValue>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -614,28 +614,6 @@
     <!-- http://www.unibz.it/inf/obdaplugin#UserPreference -->
 
     <owl:Class rdf:about="http://www.unibz.it/inf/obdaplugin#UserPreference"/>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Individuals
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    
-
-
-    <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#emoji -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#emoji">
-        <rdf:type rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Emoji"/>
-        <type_of_emoji>🙂</type_of_emoji>
-        <type_of_emotion>neutral</type_of_emotion>
-        <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
-    </owl:NamedIndividual>
 </rdf:RDF>
 
 

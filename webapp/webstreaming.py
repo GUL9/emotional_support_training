@@ -96,9 +96,7 @@ def init_ontology():
         # init Emojis
         for emotion_type in dictgraphic.keys():
             for emoji_type in dictgraphic[emotion_type]:
-                ontology.Emoji(type_of_emotion=emotion_type,
-                           type_of_emoji=emoji_type,
-                           usage_frequency=0)
+                ontology.Emoji(type_of_emotion=emotion_type, type_of_emoji=emoji_type, usage_frequency=0)
         # Reason
         sync_reasoner()
 
@@ -106,12 +104,17 @@ def init_ontology():
 def update_patient_expressions(facial_expression, voice_expression):
     global ontology, patient
     with ontology:
-        patient.has_facial_expression.type_of_emotion = facial_expression
-        patient.has_voice_expression.type_of_emotion = voice_expression
+        if patient.has_facial_expression.type_of_emotion != facial_expression:
+            patient.has_facial_expression.type_of_emotion = facial_expression
+            sync_reasoner()
+        if patient.has_voice_expression.type_of_emotion != voice_expression:
+            patient.has_voice_expression.type_of_emotion = voice_expression
+            sync_reasoner()
 
 def get_emoji_from_emotion(emo):
+    global ontology
     with ontology:
-        if emo == "nautral":
+        if emo == "neutral":
             return ontology.search(type=ontology.NeutralEmoji)
         if emo == "happy":
             return ontology.search(type=ontology.HappyEmoji)
@@ -122,15 +125,37 @@ def get_emoji_from_emotion(emo):
 
 
 def generate_emoji_list():
-    global ontology
+    global ontology, patient
     with ontology:
-        facial_expression = user.has_facial_expression.type_of_emotion
-        voice_expression = user.has_voice_expression.type_of_emotion
-        emojis = ontology.Emoji.instances()
-        face_emojis = []
-        voice_emojis = []
+        facial_expression = patient.has_facial_expression.type_of_emotion
+        voice_expression = patient.has_voice_expression.type_of_emotion
+        if facial_expression == None or voice_expression == None:
+            return []
+        else:
 
+            face_emojis = get_emoji_from_emotion(facial_expression)
+            voice_emojis = get_emoji_from_emotion(voice_expression)
 
+            emojis = []
+            def sort_frequency(emoji):
+                if emoji.usage_frequency != None:
+                    return emoji.usage_frequency
+                return 0
+
+            if facial_expression != voice_expression:
+                face_emojis.sort(key=sort_frequency, reverse=True)
+                voice_emojis.sort(key=sort_frequency, reverse=True)
+                frequent_emojis = face_emojis[:2].append(voice_emojis[:2])
+                frequent_emojis.sort(key=sort_frequency, reverse=True)
+                for emoji in frequent_emojis:
+                    emojis.append(emoji.type_of_emoji)
+            else:
+                face_emojis.sort(key=sort_frequency, reverse=True)
+                frequent_emojis = face_emojis[:4]
+                for emoji in frequent_emojis:
+                    emojis.append(emoji.type_of_emoji)
+
+            return emojis
 
 
 def update_emoji_frequency(emoji_type):
@@ -140,6 +165,7 @@ def update_emoji_frequency(emoji_type):
             if emoji.type_of_emoji == emoji_type:
                 emoji.usage_frequency += 1
                 print(emoji.usage_frequency)
+                sync_reasoner()
 
 
 def update_user_interaction_interval():
@@ -148,6 +174,7 @@ def update_user_interaction_interval():
         time = user.has_preference_to_interact_with_interval.in_seconds
         print("Current time interval: " + str(time))
         user.has_preference_to_interact_with_interval.in_seconds = time-1
+        sync_reasoner()
 
 
 @ app.route("/")
@@ -155,19 +182,20 @@ def index():
     print("index")
     global emotion, dictgraphic, start_time, time_interval, patient
     # return the rendered template
+    with lock:
+        emojis = generate_emoji_list()
     return render_template("index.html",
            emosh=patient.has_facial_expression.type_of_emotion,
-           emoji=sorted(dictgraphic[emotion],
-           key=counter.get,
-           reverse=True),
+           emoji=emojis,
            interval=user.has_preference_to_interact_with_interval.in_seconds)
 
 
 @ app.route('/count', methods=['POST'])
 def count():
     emoji = request.form['data']
-    update_emoji_frequency(emoji)
-    update_user_interaction_interval()
+    with lock:
+        update_emoji_frequency(emoji)
+        update_user_interaction_interval()
     return ('', 200)
 
 
@@ -194,8 +222,10 @@ def detect_emotion(frameCount):
             outputFrame, actions=['emotion'], enforce_detection=False)
 
         result = {key:value for (key,value) in result['emotion'].items() if key in active_emotions}
-        emotion = max(result)
-        update_patient_expressions(emotion, emotion)
+        emotion = max(result, key=lambda emotion: result[emotion])
+        print(emotion)
+        with lock:
+            update_patient_expressions(emotion, emotion)
 
 
 def generate():
