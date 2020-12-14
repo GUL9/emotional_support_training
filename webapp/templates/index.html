@@ -50,6 +50,14 @@
               
             });
     </script>
+    <script>
+      window.setInterval('refresh()', {{interval}}*1000); 	
+  
+      // Refresh or reload page.
+      function refresh() {
+          window .location.reload();
+      }
+  </script>
 
 </body>
 
