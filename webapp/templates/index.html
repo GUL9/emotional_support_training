@@ -1,40 +1,56 @@
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Emotion Recognition</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  </head>
-  <body>
-    <h1>Feeling Emosh</h1>
-    <div class="container">
-      <img src="{{ url_for('video_feed') }}" class="image"/>
-      
-      <div class="overlay">Face {{emosh}}</div>
-      <div class="overlay-voice">Voice {{emosh}}</div>
-      <div class="overlay-bar">
-        {% for em in emoji %}
-          <span id="test" value="{{loop.index}}"> {{em}} </span>
-        {% endfor %}
-      </div>
-    </div>
-    <a href="/response">Refresh</a>
 
-    <script type=text/javascript>
+<head>
+  <meta charset="UTF-8">
+  <title>Emotion Recognition</title>
+  <link rel="shortcut icon" href="#">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <h1>Feeling Emosh</h1>
+  <div class="container">
+    <img src="{{ url_for('video_feed') }}" class="image" />
+
+    <div class="overlay">Face {{emosh}}</div>
+    <div class="overlay-voice">Voice {{emosh}}</div>
+    <div class="overlay-bar">
+      {% for em in emoji %}
+      <form id="test" method="POST" value="{{loop.index}}"> {{em}} </form>
+      {% endfor %}
+    </div>
+  </div>
+  <a href="/response">Refresh</a>
+
+  <script type=text/javascript>
             $(function() {
-              $('span#test').on('click', function(e) {
+              $('form#test').on('click', function(e) {
                 e.preventDefault()
-                $.getJSON('/background_process_test',
-                    function(data) {
-                      
-                  //do nothing
+                // $.getJSON('/count/{{targ}}',
+                //     function(data) {
+                //       print(data)
+                //   //do nothing
+                // });
+                $.ajax({
+                        type: 'POST',
+                        url: '/count',
+                        data: {'data': e.target.innerHTML},
+                        success: function() {
+                            alert(e.target.innerHTML+' gets an upvote!');
+                        },
+                        error: function() {
+                            alert("Oops! Something went wrong.");
+                        }
                 });
-                alert(e.target.innerHTML+' gets an upvote!');
+                
                 return false;
               });
+              
             });
     </script>
 
-  </body>
+</body>
+
 </html>

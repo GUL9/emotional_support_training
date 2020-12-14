@@ -55,11 +55,11 @@
   opacity: 1;
 }
 
-span {
+form {
   display: inline-block;
   background-color: transparent;
 }
-span:hover {
+form:hover {
   background-color: greenyellow;
   cursor: pointer;
 }

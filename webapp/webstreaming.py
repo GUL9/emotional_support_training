@@ -5,6 +5,8 @@ from imutils.video import VideoStream
 from flask import Response
 from flask import Flask
 from flask import render_template
+from flask import request
+from flask import redirect, url_for
 import threading
 import argparse
 import datetime
@@ -13,11 +15,15 @@ import time
 import cv2
 from deepface import DeepFace
 import random
+import atexit
 
+from apscheduler.schedulers.background import BackgroundScheduler
 
 # initialize the output frame and a lock used to ensure thread-safe
 # exchanges of the output frames (useful when multiple browsers/tabs
 # are viewing the stream)
+time_interval = 10
+start_time = 0
 outputFrame = None
 lock = threading.Lock()
 # initialize a flask object
@@ -36,24 +42,55 @@ dictgraphic = {'emosh': ['🙃'],
                'disgust': ['🤢', '🤮', '😣', '😖'],
                'fear': ['😨', '😰', '😥', '😓'],
                'surprise': ['😱']}
-counter = 0
+counter = {'🙃': 0,
+           '😊': 0,
+           '😃': 0,
+           '😄': 0,
+           '😁': 0,
+           '😆': 0,
+           '😉': 0,
+           '😤': 0,
+           '😠': 0,
+           '😡': 0,
+           '🤬': 0,
+           '😒': 0,
+           '😣': 0,
+           '☹️': 0,
+           '😢': 0,
+           '😭': 0,
+           '😟': 0,
+           '😥': 0,
+           '🙂': 0,
+           '😐': 0,
+           '🧐': 0,
+           '😑': 0,
+           '🤢': 0,
+           '🤮': 0,
+           '😣': 0,
+           '😖': 0,
+           '😨': 0,
+           '😰': 0,
+           '😥': 0,
+           '😓': 0,
+           '😱': 0}
 
 
-@app.route("/")
+@ app.route("/")
 def index():
-    global emotion, dictgraphic
+    global emotion, dictgraphic, start_time, time_interval
     # return the rendered template
-    return render_template("index.html", emosh=emotion, emoji=dictgraphic[emotion])
-
-# background process happening without any refreshing
+    return render_template("index.html", emosh=emotion, emoji=sorted(dictgraphic[emotion], key=counter.get, reverse=True), interval=time_interval)
 
 
-@app.route('/background_process_test')
-def background_process_test():
-    global counter
-    counter += 1
-    print(counter)
-    return ("nothing")
+@ app.route('/count', methods=['POST'])
+def count():
+    global time_interval
+   # delete
+    id = request.form['data']
+    counter[id.strip()] += 1
+    if time_interval > 5:
+        time_interval -= 1
+    return ('', 200)
 
 
 def detect_emotion(frameCount):
@@ -82,7 +119,8 @@ def detect_emotion(frameCount):
 
 def generate():
     # grab global references to the output frame and lock variables
-    global outputFrame, lock
+    global outputFrame, lock, time_interval, start_time
+
     # loop over frames from the output stream
     while True:
         frame = vs.read()
@@ -104,7 +142,7 @@ def generate():
               bytearray(encodedImage) + b'\r\n')
 
 
-@app.route("/video_feed")
+@ app.route("/video_feed")
 def video_feed():
     # return the response generated along with the specific media
     # type (mime type)
@@ -112,17 +150,16 @@ def video_feed():
                     mimetype="multipart/x-mixed-replace; boundary=frame")
 
 
-@app.route('/response')
+@ app.route('/response')
 def response():
-    # emotions = ['Happy', "Sad", "Angry", "Neutral"]
-    # emotion = emotions[random.randint(0, 3)]
-    global emotion, dictgraphic
-    return render_template("index.html", emosh=emotion, emoji=dictgraphic[emotion])
+    global emotion, dictgraphic, time_interval
+    return render_template("index.html", emosh=emotion, emoji=sorted(dictgraphic[emotion], key=counter.get, reverse=True), interval=time_interval)
 
 
 # check to see if this is the main thread of execution
 if __name__ == '__main__':
     # construct the argument parser and parse command line arguments
+
     ap = argparse.ArgumentParser()
     ap.add_argument("-i", "--ip", type=str, required=True,
                     help="ip address of the device")
@@ -136,25 +173,10 @@ if __name__ == '__main__':
         args["frame_count"],))
     t.daemon = True
     t.start()
+
     # start the flask app
     app.run(host=args["ip"], port=args["port"], debug=True,
             threaded=True, use_reloader=False)
-
-
-@app.context_processor
-def override_url_for():
-    return dict(url_for=dated_url_for)
-
-
-def dated_url_for(endpoint, **values):
-    if endpoint == 'static':
-        filename = values.get('filename', None)
-        if filename:
-            file_path = os.path.join(app.root_path,
-                                     endpoint, filename)
-            values['q'] = int(os.stat(file_path).st_mtime)
-    return url_for(endpoint, **values)
-
 
 # release the video stream pointer
 vs.stop()
