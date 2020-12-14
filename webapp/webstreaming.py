@@ -17,8 +17,6 @@ from deepface import DeepFace
 import random
 import atexit
 
-from apscheduler.schedulers.background import BackgroundScheduler
-
 # initialize the output frame and a lock used to ensure thread-safe
 # exchanges of the output frames (useful when multiple browsers/tabs
 # are viewing the stream)
