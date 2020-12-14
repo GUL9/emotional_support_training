@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97b40c32-e467-478d-8312-23dd005b41c8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ontologies/ontology.owl" beforeDir="false" afterPath="$PROJECT_DIR$/ontologies/ontology.owl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webapp/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webapp/static/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webapp/templates/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webapp/webstreaming.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +51,7 @@
       <workItem from="1607940238142" duration="76000" />
       <workItem from="1607940322899" duration="9164000" />
       <workItem from="1607950159110" duration="1720000" />
-      <workItem from="1607952544730" duration="4832000" />
+      <workItem from="1607952544730" duration="5271000" />
     </task>
     <servers />
   </component>
