@@ -16,6 +16,8 @@ import cv2
 from deepface import DeepFace
 import random
 import atexit
+import owlready2
+from owlready2 import *
 
 # initialize the output frame and a lock used to ensure thread-safe
 # exchanges of the output frames (useful when multiple browsers/tabs
@@ -71,17 +73,40 @@ counter = {'🙃': 0,
            '😥': 0,
            '😓': 0,
            '😱': 0}
+ontology = None
+patient = None
+
+
+def init_ontology():
+    global ontology, patient
+    ontology = get_ontology("../ontologies/ontology.owl").load()
+    with ontology:
+        # init Patient
+        patient = ontology.Patient(
+            has_state=[ontology.State()],
+            has_facial_expression=[ontology.Emotion(type_of_emotion=["none"])],
+            has_voice_expression=[ontology.Emotion(type_of_emotion=["none"])]
+        )
+
+
+def updatePatientExpressions(facial_expression, voice_expression):
+    global ontology, patient
+    with ontology:
+        patient.has_facial_expression[0].type_of_emotion = [facial_expression]
+        patient.has_voice_expression[0].type_of_emotion = [voice_expression]
 
 
 @ app.route("/")
 def index():
-    global emotion, dictgraphic, start_time, time_interval
+    print("index")
+    global emotion, dictgraphic, start_time, time_interval, patient
     # return the rendered template
-    return render_template("index.html", emosh=emotion, emoji=sorted(dictgraphic[emotion], key=counter.get, reverse=True), interval=time_interval)
+    return render_template("index.html", emosh=patient.has_facial_expression[0].type_of_emotion[0], emoji=sorted(dictgraphic[emotion], key=counter.get, reverse=True), interval=time_interval)
 
 
 @ app.route('/count', methods=['POST'])
 def count():
+    print("count")
     global time_interval
    # delete
     id = request.form['data']
@@ -92,9 +117,11 @@ def count():
 
 
 def detect_emotion(frameCount):
+    print("detect_emotion")
+
     # grab global references to the video stream, output frame, and
     # lock variables
-    global vs, outputFrame, emotion
+    global vs, outputFrame, emotion, patient, onto
 
     with lock:
         # check if the output frame is available, otherwise skip
@@ -113,9 +140,13 @@ def detect_emotion(frameCount):
 
         # # print(result)
         emotion = max(result['emotion'], key=result['emotion'].get)
+        updatePatientExpressions(emotion, emotion)
+
 
 
 def generate():
+    print("generate")
+
     # grab global references to the output frame and lock variables
     global outputFrame, lock, time_interval, start_time
 
@@ -150,6 +181,8 @@ def video_feed():
 
 @ app.route('/response')
 def response():
+    print("response")
+
     global emotion, dictgraphic, time_interval
     return render_template("index.html", emosh=emotion, emoji=sorted(dictgraphic[emotion], key=counter.get, reverse=True), interval=time_interval)
 
@@ -166,6 +199,10 @@ if __name__ == '__main__':
     ap.add_argument("-f", "--frame-count", type=int, default=32,
                     help="# of frames used to construct the background model")
     args = vars(ap.parse_args())
+
+    # read and inits the ontology
+    init_ontology()
+
     # start a thread that will perform emotion detection
     t = threading.Thread(target=detect_emotion, args=(
         args["frame_count"],))
