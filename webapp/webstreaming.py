@@ -33,6 +33,7 @@ app = Flask(__name__)
 # vs = VideoStream(usePiCamera=1).start()
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
+active_emotions = ['happy', 'neutral', 'angry', 'sad']
 emotion = 'emosh'
 dictgraphic = {'emosh': ['🙃'],
                'happy': ['😊', '😃', '😄', '😁', '😆', '😉'],
@@ -75,25 +76,78 @@ counter = {'🙃': 0,
            '😱': 0}
 ontology = None
 patient = None
+user = None
 
 
 def init_ontology():
-    global ontology, patient
+    global ontology, patient, user
     ontology = get_ontology("../ontologies/ontology.owl").load()
     with ontology:
         # init Patient
         patient = ontology.Patient(
             has_state=[ontology.State()],
-            has_facial_expression=[ontology.Emotion(type_of_emotion=["none"])],
-            has_voice_expression=[ontology.Emotion(type_of_emotion=["none"])]
+            has_facial_expression=ontology.Emotion(type_of_emotion="none"),
+            has_voice_expression=ontology.Emotion(type_of_emotion="none")
         )
+        # init User
+        user = ontology.User(
+            has_preference_to_interact_with_interval=ontology.Time(in_seconds=10)
+        )
+        # init Emojis
+        for emotion_type in dictgraphic.keys():
+            for emoji_type in dictgraphic[emotion_type]:
+                ontology.Emoji(type_of_emotion=emotion_type,
+                           type_of_emoji=emoji_type,
+                           usage_frequency=0)
+        # Reason
+        sync_reasoner()
 
 
-def updatePatientExpressions(facial_expression, voice_expression):
+def update_patient_expressions(facial_expression, voice_expression):
     global ontology, patient
     with ontology:
-        patient.has_facial_expression[0].type_of_emotion = [facial_expression]
-        patient.has_voice_expression[0].type_of_emotion = [voice_expression]
+        patient.has_facial_expression.type_of_emotion = facial_expression
+        patient.has_voice_expression.type_of_emotion = voice_expression
+
+def get_emoji_from_emotion(emo):
+    with ontology:
+        if emo == "nautral":
+            return ontology.search(type=ontology.NeutralEmoji)
+        if emo == "happy":
+            return ontology.search(type=ontology.HappyEmoji)
+        if emo == "sad":
+            return ontology.search(type=ontology.SadEmoji)
+        if emo == "angry":
+            return ontology.search(type=ontology.AngryEmoji)
+
+
+def generate_emoji_list():
+    global ontology
+    with ontology:
+        facial_expression = user.has_facial_expression.type_of_emotion
+        voice_expression = user.has_voice_expression.type_of_emotion
+        emojis = ontology.Emoji.instances()
+        face_emojis = []
+        voice_emojis = []
+
+
+
+
+def update_emoji_frequency(emoji_type):
+    global ontology
+    with ontology:
+        for emoji in ontology.Emoji.instances():
+            if emoji.type_of_emoji == emoji_type:
+                emoji.usage_frequency += 1
+                print(emoji.usage_frequency)
+
+
+def update_user_interaction_interval():
+    global user
+    if user.has_preference_to_interact_with_interval.in_seconds > 3:
+        time = user.has_preference_to_interact_with_interval.in_seconds
+        print("Current time interval: " + str(time))
+        user.has_preference_to_interact_with_interval.in_seconds = time-1
 
 
 @ app.route("/")
@@ -101,18 +155,19 @@ def index():
     print("index")
     global emotion, dictgraphic, start_time, time_interval, patient
     # return the rendered template
-    return render_template("index.html", emosh=patient.has_facial_expression[0].type_of_emotion[0], emoji=sorted(dictgraphic[emotion], key=counter.get, reverse=True), interval=time_interval)
+    return render_template("index.html",
+           emosh=patient.has_facial_expression.type_of_emotion,
+           emoji=sorted(dictgraphic[emotion],
+           key=counter.get,
+           reverse=True),
+           interval=user.has_preference_to_interact_with_interval.in_seconds)
 
 
 @ app.route('/count', methods=['POST'])
 def count():
-    print("count")
-    global time_interval
-   # delete
-    id = request.form['data']
-    counter[id.strip()] += 1
-    if time_interval > 5:
-        time_interval -= 1
+    emoji = request.form['data']
+    update_emoji_frequency(emoji)
+    update_user_interaction_interval()
     return ('', 200)
 
 
@@ -138,10 +193,9 @@ def detect_emotion(frameCount):
         result = DeepFace.analyze(
             outputFrame, actions=['emotion'], enforce_detection=False)
 
-        # # print(result)
-        emotion = max(result['emotion'], key=result['emotion'].get)
-        updatePatientExpressions(emotion, emotion)
-
+        result = {key:value for (key,value) in result['emotion'].items() if key in active_emotions}
+        emotion = max(result)
+        update_patient_expressions(emotion, emotion)
 
 
 def generate():
