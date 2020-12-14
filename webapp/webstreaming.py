@@ -83,7 +83,6 @@ def index():
 @ app.route('/count', methods=['POST'])
 def count():
     global time_interval
-   # delete
     id = request.form['data']
     counter[id.strip()] += 1
     if time_interval > 5:
