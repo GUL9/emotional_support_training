@@ -25,6 +25,8 @@
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_classification">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_current"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Module"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Emotion"/>
     </owl:ObjectProperty>
     
 
@@ -34,6 +36,62 @@
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_current">
         <rdfs:domain rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
         <rdfs:range rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_expression -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_expression">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_current"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#actor"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Emotion"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_facial_expression -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_facial_expression">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_expression"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_preference -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_preference">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#actor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_preference_to_input -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_preference_to_input">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_preference"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#User"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Input"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_preference_to_interact_in -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_preference_to_interact_in">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_preference"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Time"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_preference_with_emoji -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_preference_with_emoji">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_preference"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#User"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Emoji"/>
     </owl:ObjectProperty>
     
 
@@ -48,23 +106,57 @@
     
 
 
-    <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_type_of_emotion -->
+    <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_voice_expression -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_type_of_emotion">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_current"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Classification"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Emotion"/>
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_voice_expression">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_expression"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#represents -->
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#represents">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdfs:domain rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#in_seconds -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#in_seconds">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Time"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#type -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#type"/>
+    
+
+
+    <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#type_of_emoji -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#type_of_emoji">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#type"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Emoji"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#type_of_emotion -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#type_of_emotion">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#type"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Emotion"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
     
 
 
@@ -96,17 +188,6 @@
     <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#AngryClassification -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#AngryClassification">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Classification"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_type_of_emotion"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Anger"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#ClassificationState"/>
     </owl:Class>
     
@@ -128,30 +209,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Classification -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Classification"/>
-    
-
-
     <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#ClassificationNotReady -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#ClassificationNotReady">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#ModuleState"/>
-                    <owl:Class>
-                        <owl:complementOf>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_classification"/>
-                                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Classification"/>
-                            </owl:Restriction>
-                        </owl:complementOf>
-                    </owl:Class>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#ClassificationState"/>
     </owl:Class>
     
@@ -160,17 +220,6 @@
     <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#ClassificationReady -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#ClassificationReady">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#ModuleState"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_classification"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Classification"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#ClassificationState"/>
     </owl:Class>
     
@@ -249,17 +298,6 @@
     <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#HappyClassification -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#HappyClassification">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Classification"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_type_of_emotion"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Happiness"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#ClassificationState"/>
     </owl:Class>
     
@@ -344,17 +382,6 @@
     <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#NeutralClassification -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#NeutralClassification">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Classification"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_type_of_emotion"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Neutral"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#ClassificationState"/>
     </owl:Class>
     
@@ -403,17 +430,6 @@
     <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#SadClassification -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#SadClassification">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Classification"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#has_type_of_emotion"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Sadness"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#ClassificationState"/>
     </owl:Class>
     
@@ -449,17 +465,17 @@
     
 
 
+    <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Time -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Time"/>
+    
+
+
     <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#User -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#User">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#actor"/>
     </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#UserPreference -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#UserPreference"/>
     
 
 
@@ -498,6 +514,12 @@
     <!-- http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#actor -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#actor"/>
+    
+
+
+    <!-- http://www.unibz.it/inf/obdaplugin#UserPreference -->
+
+    <owl:Class rdf:about="http://www.unibz.it/inf/obdaplugin#UserPreference"/>
 </rdf:RDF>
 
 
