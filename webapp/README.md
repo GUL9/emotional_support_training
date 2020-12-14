@@ -11,6 +11,8 @@ openCV Emotion Classifier to WebApp using Flask
 
 `pip install numpy`
 
+`pip install deepface`
+
 
 ## Run command:
 
