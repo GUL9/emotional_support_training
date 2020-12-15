@@ -34,8 +34,8 @@ active_emotions = ['happy', 'neutral', 'angry', 'sad']
 active_emojis = {
     'happy': ['😊', '😃', '😄', '😁', '😆', '😉'],
     'angry': ['😤', '😠', '😡', '🤬', '😒', '😣'],
-    'sad': ['☹️', '😢', '😭', '😟', '😥'],
-    'neutral': ['🙂', '😐', '🧐', '😑'],
+    'sad': ['😔', '😢', '😭', '😟', '😥', '🥺'],
+    'neutral': ['🙂', '😐', '🧐', '😑', '🧑', '👩'],
 }
 
 ontology = None
@@ -183,7 +183,7 @@ def dismiss():
     return ('', 200)
 
 
-@app.route('/_stuff', methods=['GET'])
+@app.route('/_update', methods=['GET'])
 def stuff():
     global patient, user
     with lock:
