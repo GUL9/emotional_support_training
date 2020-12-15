@@ -35,35 +35,48 @@ app = Flask(__name__)
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
 
-time_interval = 5000
-active_emotions = ['happy', 'neutral', 'angry', 'sad']
+# Time intervals
+DEFAULT_TIME_INTERVAL = 5000
+MAX_TIME_INTERVAL = 30000
+MIN_TIME_INTERVAL =3000
+DISMISS_TIME_CHANGE = 5000
+EMOJI_TIME_CHANGE = 1000
+# User actions
+EMOJI = "emoji"
+DISMISS = "dismiss"
+active_user_actions =[EMOJI, DISMISS]
+# Emotions
+NEUTRAL = "neutral"
+HAPPY = "happy"
+ANGRY = "angry"
+SAD = "sad"
+active_emotions = [NEUTRAL, HAPPY, ANGRY, SAD]
 active_emojis = {
-               'happy': ['😊', '😃', '😄', '😁', '😆', '😉'],
-               'angry': ['😤', '😠', '😡', '🤬', '😒', '😣'],
-               'sad': ['☹️', '😢', '😭', '😟', '😥'],
-               'neutral': ['🙂', '😐', '🧐', '😑'],
+               HAPPY: ['😊', '😃', '😄', '😁', '😆', '😉'],
+               ANGRY: ['😤', '😠', '😡', '🤬', '😒', '😣'],
+               SAD: ['☹️', '😢', '😭', '😟', '😥'],
+               NEUTRAL: ['🙂', '😐', '🧐', '😑'],
                }
-
+# Ontology globals
 ontology = None
 patient = None
 user = None
-
 
 def init_ontology():
     global ontology, patient, user
     ontology = get_ontology("../ontologies/ontology.owl").load()
     with ontology:
-        # init Patient
+        # init Patient: neutral expressions
         patient = ontology.Patient(
             has_state=[ontology.State()],
-            has_facial_expression=ontology.Emotion(type_of_emotion="neutral"),
-            has_voice_expression=ontology.Emotion(type_of_emotion="neutral")
+            has_facial_expression=ontology.Emotion(type_of_emotion=NEUTRAL),
+            has_voice_expression=ontology.Emotion(type_of_emotion=NEUTRAL)
         )
-        # init User
+        # init User: default time interval
         user = ontology.User(
-            has_preference_to_interact_with_interval=ontology.Time(in_seconds=time_interval)
+            has_preference_to_interact_with_interval=ontology.Time(in_seconds=DEFAULT_TIME_INTERVAL)
         )
-        # init Emojis
+        # init Emojis: corresponding emotion type and 0 frequency
         for emotion_type in active_emojis.keys():
             for emoji_type in active_emojis[emotion_type]:
                 ontology.Emoji(type_of_emotion=emotion_type, type_of_emoji=emoji_type, usage_frequency=0)
@@ -73,6 +86,7 @@ def init_ontology():
 
 
 def update_patient_expressions(facial_expression, voice_expression):
+    # Update if expression has changed; reason if updated
     global ontology, patient
     with ontology:
         changed = False
@@ -86,20 +100,23 @@ def update_patient_expressions(facial_expression, voice_expression):
             sync_reasoner()
             ontology.save("../ontologies/saved.owl")
 
-def get_emoji_from_emotion(emo):
+def get_emoji_from_emotion(emotion):
+    # Returns list of all Emoji-instances for given emotion
     global ontology
     with ontology:
-        if emo == "neutral":
+        if emotion == NEUTRAL:
             return ontology.search(type=ontology.NeutralEmoji)
-        if emo == "happy":
+        if emotion == HAPPY:
             return ontology.search(type=ontology.HappyEmoji)
-        if emo == "sad":
+        if emotion == SAD:
             return ontology.search(type=ontology.SadEmoji)
-        if emo == "angry":
+        if emotion == ANGRY:
             return ontology.search(type=ontology.AngryEmoji)
 
 
 def generate_emoji_list():
+    # Returns list of Emojis (string representation);
+    # Total 4 emojis; 2 from facial expression, 2 from voice expression
     global ontology, patient
     with ontology:
         facial_expression = patient.has_facial_expression.type_of_emotion
@@ -107,7 +124,7 @@ def generate_emoji_list():
         if facial_expression == None or voice_expression == None:
             return []
         else:
-
+            #Get all emojis of corresponding expressions
             face_emojis = get_emoji_from_emotion(facial_expression)
             voice_emojis = get_emoji_from_emotion(voice_expression)
 
@@ -116,7 +133,7 @@ def generate_emoji_list():
                 if emoji.usage_frequency != None:
                     return emoji.usage_frequency
                 return 0
-
+            # When expressions differ; pick 2 from each
             if facial_expression != voice_expression:
                 face_emojis.sort(key=sort_frequency, reverse=True)
                 voice_emojis.sort(key=sort_frequency, reverse=True)
@@ -124,6 +141,7 @@ def generate_emoji_list():
                 frequent_emojis.sort(key=sort_frequency, reverse=True)
                 for emoji in frequent_emojis:
                     emojis.append(emoji.type_of_emoji)
+            # When expressions are the same; pick 4 from one
             else:
                 face_emojis.sort(key=sort_frequency, reverse=True)
                 frequent_emojis = face_emojis[:4]
@@ -134,6 +152,7 @@ def generate_emoji_list():
 
 
 def update_emoji_frequency(emoji_type):
+    # Increment usage frequency for given emoji type
     global ontology
     with ontology:
         for emoji in ontology.Emoji.instances():
@@ -143,20 +162,20 @@ def update_emoji_frequency(emoji_type):
 
 
 def update_user_interaction_interval(input_type):
+    # Increment or decrement interaction time interval
     global user
-    if input_type == "emoji":
-        if user.has_preference_to_interact_with_interval.in_seconds > 3000:
-            user.has_preference_to_interact_with_interval.in_seconds -= 1000
+    if input_type == EMOJI:
+        if user.has_preference_to_interact_with_interval.in_seconds > MIN_TIME_INTERVAL:
+            user.has_preference_to_interact_with_interval.in_seconds -= EMOJI_TIME_CHANGE
 
-    if input_type == "dismiss":
-        if user.has_preference_to_interact_with_interval.in_seconds < 60000:
-            user.has_preference_to_interact_with_interval.in_seconds += 5000
+    if input_type == DISMISS:
+        if user.has_preference_to_interact_with_interval.in_seconds < MAX_TIME_INTERVAL:
+            user.has_preference_to_interact_with_interval.in_seconds += DISMISS_TIME_CHANGE
     print("Current time interval: " + str(user.has_preference_to_interact_with_interval.in_seconds))
 
 
 @ app.route("/")
 def index():
-    print("index")
     global patient
     # return the rendered template
     with lock:
@@ -172,7 +191,7 @@ def count():
     emoji = request.form['data']
     with lock:
         update_emoji_frequency(emoji)
-        update_user_interaction_interval("emoji")
+        update_user_interaction_interval(EMOJI)
 
     return ('', 200)
 
@@ -180,7 +199,7 @@ def count():
 @ app.route('/dismiss', methods=['POST'])
 def dismiss():
     with lock:
-        update_user_interaction_interval("dismiss")
+        update_user_interaction_interval(DISMISS)
     return ('', 200)
 
 
