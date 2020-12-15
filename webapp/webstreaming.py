@@ -42,6 +42,8 @@ time.sleep(2.0)
 
 
 VOICE_MODEL = pickle.load(open("speechRecognition/result/mlp_classifier.model", "rb"))
+PATH_TO_ONTOLOGY = "ontologies/ontology.owl"
+PATH_TO_SAVE_REASONED_ONTOLOGY = "ontologies/saved.owl"
 
 PATH_TO_SOUND_FILE = "sound/soundfile.wav"
 should_classify_voice = False
@@ -75,7 +77,7 @@ user = None
 
 def init_ontology():
     global ontology, patient, user
-    ontology = get_ontology("ontologies/ontology.owl").load()
+    ontology = get_ontology(PATH_TO_ONTOLOGY).load()
     with ontology:
         # init Patient: neutral expressions
         patient = ontology.Patient(
@@ -92,7 +94,7 @@ def init_ontology():
             for emoji_type in active_emojis[emotion_type]:
                 ontology.Emoji(type_of_emotion=emotion_type, type_of_emoji=emoji_type, usage_frequency=0)
         # Reason
-        ontology.save("ontologies/saved.owl")
+        ontology.save(PATH_TO_SAVE_REASONED_ONTOLOGY)
         sync_reasoner()
 
 
@@ -171,6 +173,9 @@ def update_emoji_frequency(emoji_type):
             if emoji.type_of_emoji in emoji_type:
                 emoji.usage_frequency += 1
                 print("Usage Frequency for" + emoji_type +  str(emoji.usage_frequency))
+                sync_reasoner()
+                ontology.save("ontologies/saved.owl")
+
 
 
 def update_user_interaction_interval(input_type):
@@ -183,6 +188,9 @@ def update_user_interaction_interval(input_type):
     if input_type == DISMISS:
         if user.has_preference_to_interact_with_interval.in_seconds < MAX_TIME_INTERVAL:
             user.has_preference_to_interact_with_interval.in_seconds += DISMISS_TIME_CHANGE
+
+    sync_reasoner()
+    ontology.save("ontologies/saved.owl")
     print("Current time interval: " + str(user.has_preference_to_interact_with_interval.in_seconds))
 
 
