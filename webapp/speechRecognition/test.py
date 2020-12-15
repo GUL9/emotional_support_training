@@ -8,7 +8,7 @@ from array import array
 from struct import pack
 from sklearn.neural_network import MLPClassifier
 
-from utils import extract_feature
+from speechRecognition.utils import extract_feature
 
 THRESHOLD = 500
 CHUNK_SIZE = 1024
@@ -126,13 +126,14 @@ def record_seconds(seconds):
 
     r = array('h')
     stop_time = time.time() + seconds
+    print("Recording for " + str(seconds))
     while time.time() < stop_time:
         # little endian, signed short
         snd_data = array('h', stream.read(CHUNK_SIZE))
         if byteorder == 'big':
             snd_data.byteswap()
         r.extend(snd_data)
-
+    print("Done recording")
     sample_width = p.get_sample_size(FORMAT)
     stream.stop_stream()
     stream.close()
@@ -143,9 +144,10 @@ def record_seconds(seconds):
     r = add_silence(r, 0.5)
     return sample_width, r
 
-def record_to_file(path):
+def record_to_file(path, seconds):
     "Records from the microphone and outputs the resulting data to 'path'"
-    sample_width, data = record_seconds()
+
+    sample_width, data = record_seconds(seconds)
     data = pack('<' + ('h'*len(data)), *data)
 
     wf = wave.open(path, 'wb')

@@ -18,12 +18,12 @@
     <img src="{{ url_for('video_feed') }}" class="image" />
 
     <div id="overlay">
-      <div class="overlay">Face: {{emosh}}</div>
-      <div class="overlay-voice">Voice: {{emosh}}</div>
+      <div class="overlay">Face: {{face}}</div>
+      <div class="overlay-voice">Voice: {{voice}}</div>
       <button class="btn" id="dismiss" method="POST">Dismiss</button>
       <!-- onclick="hide()" -->
       <div class=" overlay-bar">
-        {% for em in emoji %}
+        {% for em in emojis %}
         <form id="vote" method="POST" value="{{loop.index}}"> {{em}} </form>
         {% endfor %}
       </div>

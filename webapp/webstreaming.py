@@ -19,17 +19,21 @@ import atexit
 import owlready2
 from owlready2 import *
 
-#import speechRecognition.test
-#import speechRecognition.utils
+
+import pickle
+import speechRecognition.test as test
+import speechRecognition.utils as utils
 
 # initialize the output frame and a lock used to ensure thread-safe
 # exchanges of the output frames (useful when multiple browsers/tabs
 # are viewing the stream)
 
 
-
 outputFrame = None
 lock = threading.Lock()
+user_lock = threading.Lock()
+patient_lock = threading.Lock()
+ontology_lock = threading.Lock()
 # initialize a flask object
 app = Flask(__name__)
 # initialize the video stream and allow the camera sensor to
@@ -37,6 +41,9 @@ app = Flask(__name__)
 # vs = VideoStream(usePiCamera=1).start()
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
+
+
+VOICE_MODEL = pickle.load(open("speechRecognition/result/mlp_classifier.model", "rb"))
 
 PATH_TO_SOUND_FILE = "sound/soundfile.wav"
 should_classify_voice = False
@@ -184,21 +191,23 @@ def update_user_interaction_interval(input_type):
 
 @ app.route("/")
 def index():
-    global patient, user
+    global patient, user, should_classify_voice, ontology_lock
     # return the rendered template
-    with lock:
-        emojis = generate_emoji_list()
+    with ontology_lock:
         should_classify_voice = True
+        #emojis = generate_emoji_list()
+        emojis = []
     return render_template("index.html",
-           emosh=patient.has_facial_expression.type_of_emotion,
-           emoji=emojis,
+           face=patient.has_facial_expression.type_of_emotion,
+           voice=patient.has_voice_expression.type_of_emotion,
+           emojis=emojis,
            interval=user.has_preference_to_interact_with_interval.in_seconds)
 
 
 @ app.route('/count', methods=['POST'])
 def count():
     emoji = request.form['data']
-    with lock:
+    with ontology:
         update_emoji_frequency(emoji)
         update_user_interaction_interval(EMOJI)
 
@@ -207,32 +216,31 @@ def count():
 
 @ app.route('/dismiss', methods=['POST'])
 def dismiss():
-    with lock:
+    global ontology_lock
+    with ontology_lock:
         update_user_interaction_interval(DISMISS)
     return ('', 200)
 
 def detect_voice_expression():
-    while true:
+    global should_classify_voice, user, ontology_lock
+    while True:
         if should_classify_voice:
-            # load the saved model (after training)
-            model = pickle.load(open("speechRecognition/result/mlp_classifier.model", "rb"))
-            print("Please talk")
-            # record the file (start talking)
-            record_to_file(PATH_TO_SOUND_FILE)
-            # extract features and reshape it
-            features = extract_feature(PATH_TO_SOUND_FILE, mfcc=True, chroma=True, mel=True).reshape(1, -1)
-            # predict
-            result = model.predict(features)[0]
-            # show the result !
-            print("result:", result)
-            with lock:
-                update_patient_voice_expressions(result)
-                should_classify_voice = False
+            # Record to file until nex interval
+            with ontology_lock:
+                record_time = user.has_preference_to_interact_with_interval.in_seconds/1000 - 1
+            test.record_to_file(PATH_TO_SOUND_FILE, record_time)
+            features = utils.extract_feature(PATH_TO_SOUND_FILE, mfcc=True, chroma=True, mel=True).reshape(1, -1)
+            emotion = str(VOICE_MODEL.predict(features)[0])
+            print("Voice: " + emotion)
+
+            with ontology_lock:
+                update_patient_voice_expressions(emotion)
+            should_classify_voice = False
 
 def detect_emotion(frameCount):
     # grab global references to the video stream, output frame, and
     # lock variables
-    global vs, outputFrame,  patient
+    global vs, outputFrame,  patient, ontology_lock
 
     with lock:
         # check if the output frame is available, otherwise skip
@@ -251,10 +259,10 @@ def detect_emotion(frameCount):
 
         result = {key:value for (key,value) in result['emotion'].items() if key in active_emotions}
         emotion = max(result, key=lambda emotion: result[emotion])
-        print(emotion)
-        with lock:
+        print("Face: " + emotion)
+        with ontology_lock:
             update_patient_facial_expressions(emotion)
-            update_patient_voice_expressions(emotion)
+            #update_patient_voice_expressions(emotion)
 
 
 def generate():
@@ -318,14 +326,14 @@ if __name__ == '__main__':
     # read and init the ontology
     init_ontology()
 
-    # start a thread that will perform emotion detection
-    t = threading.Thread(target=detect_emotion, args=(
-        args["frame_count"],))
-    t.daemon = True
-    t.start()
-    #t2 = threading.Thread(target=detect_voice_expression)
-    #t2.daemon = True
-    #t2.start()
+    # start face emotion detection thread
+    face_thread = threading.Thread(target=detect_emotion, args=(args["frame_count"],))
+    face_thread.daemon = True
+    face_thread.start()
+    # start voice emotion detection thread
+    voice_thread = threading.Thread(target=detect_voice_expression)
+    voice_thread.daemon = True
+    voice_thread.start()
 
     # start the flask app
     app.run(host=args["ip"], port=args["port"], debug=True,
