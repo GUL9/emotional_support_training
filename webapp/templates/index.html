@@ -18,38 +18,72 @@
     <img src="{{ url_for('video_feed') }}" class="image" />
 
     <div id="overlay">
-      <div class="overlay">Face: {{face}}</div>
-      <div class="overlay-voice">Voice: {{voice}}</div>
+      <div class="overlay" >Face: <p id=face>{{face}}</p></div>
+      <div class="overlay-voice" >Voice: <p id=voice>{{voice}}</p></div>
+
       <button class="btn" id="dismiss" method="POST">Dismiss</button>
-      <!-- onclick="hide()" -->
-      <div class=" overlay-bar">
-        {% for em in emojis %}
+      <div class=" overlay-bar" id="emoji">
+        {% set emoji_global = emojis %}
+        {% for em in emoji_global %}
         <form id="vote" method="POST" value="{{loop.index}}"> {{em}} </form>
         {% endfor %}
       </div>
     </div>
 
   </div>
-  <div class="buttonHolder">
-    <input onclick="window.location='/';" type="button" value="Refresh" id=refresh>
+  <div>
+    <p id=interval style="font-size: 10; font-style: italic; color: gray;">current interval: {{interval}}</p>
   </div>
+  <div class="buttonHolder">
+    <input onclick="update_overlay() " type="button" value="Refresh" id=refresh style="display:inline-block;">
+  </div>
+
+  <script type='text/javascript'>
+    var globalTimeInt;
+  </script>
+  <script type=text/javascript>
+    function update_overlay() {
+            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+            $.getJSON($SCRIPT_ROOT+"/_update",
+                function(data) {
+                  data_emojis = data.emojis;
+                  $("#face").html(data.face)
+                  $("#voice").html(data.voice)
+                  
+                  // update emoji bar
+                  $('form#vote').each(function(index){
+                    $(this).html(data.emojis[index])
+                  })
+
+                  if (globalTimeInt !== null) {
+                    clearTimeout(globalTimeInt);
+                  }
+                  $("#interval").text("current interval: "+data.interval)
+                  globalTimeInt = setTimeout(update_overlay, parseInt(data.interval));
+                  show()
+                });   
+    }
+  </script>
+  <script>
+    // initiate regular overlay update
+    update_overlay();
+  </script>
 
   <script type=text/javascript>
             $(function() {
-              $('form#vote').on('click', function(e) {
+              $('body').on('click' , 'form#vote',function(e) {
                 e.preventDefault()
                 $.ajax({
                         type: 'POST',
                         url: '/count',
                         data: {'data': e.target.innerHTML},
                         success: function() {
-                            alert(e.target.innerHTML+' gets an upvote!');
+                          update_overlay(); 
                         },
                         error: function() {
                             alert("Oops! Something went wrong.");
                         }
                 });
-                
                 return false;
               });
               
@@ -57,7 +91,7 @@
   </script>
   <script type=text/javascript>
     $(function() {
-      $('button#dismiss').on('click', function(e) {
+      $('body').on('click', 'button#dismiss',function(e) {
         e.preventDefault()
         $.ajax({
                 type: 'POST',
@@ -70,30 +104,33 @@
                     alert("Oops! Something went wrong.");
                 }
         });
-        var button = document.getElementById('refresh');
-        var x = document.getElementById('overlay');
-        if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "none";
-        }
-        if (button.value == 'Refresh') {
-          button.value = 'Show'
-        } else {
-          button.value = 'Refresh'
-        }
+        hide_overlay()
         return false;
       });
     });
   </script>
 
-  <script>
-    window.setInterval('refresh()', {{ interval }});
+  <script type=text/javascript>
+    function hide_overlay() {
+          var x = document.getElementById('overlay');
+          if (x.style.display !== "none") {
+            x.style.display = "none";
+          }
+        }
+  </script>
 
-    // Refresh or reload page.
-    function refresh() {
-      window.location.reload();
-    }
+  <script type=text/javascript>
+    function show() {
+          var x = document.getElementById('overlay');
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          }
+
+          var refresh_button = document.getElementById('refresh');
+          if (refresh_button.display === "none") {
+              refresh_button.style.display = 'inline-block'
+          }
+        }
   </script>
 </body>
 
