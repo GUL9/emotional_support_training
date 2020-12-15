@@ -23,6 +23,8 @@ from owlready2 import *
 # exchanges of the output frames (useful when multiple browsers/tabs
 # are viewing the stream)
 
+
+
 outputFrame = None
 lock = threading.Lock()
 # initialize a flask object
@@ -33,6 +35,7 @@ app = Flask(__name__)
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
 
+time_interval = 5000
 active_emotions = ['happy', 'neutral', 'angry', 'sad']
 active_emojis = {
                'happy': ['😊', '😃', '😄', '😁', '😆', '😉'],
@@ -58,7 +61,7 @@ def init_ontology():
         )
         # init User
         user = ontology.User(
-            has_preference_to_interact_with_interval=ontology.Time(in_seconds=10)
+            has_preference_to_interact_with_interval=ontology.Time(in_seconds=time_interval)
         )
         # init Emojis
         for emotion_type in active_emojis.keys():
@@ -143,10 +146,10 @@ def update_emoji_frequency(emoji_type):
 
 def update_user_interaction_interval():
     global user
-    if user.has_preference_to_interact_with_interval.in_seconds > 3:
+    if user.has_preference_to_interact_with_interval.in_seconds > 3000:
         time = user.has_preference_to_interact_with_interval.in_seconds
         print("Current time interval: " + str(time))
-        user.has_preference_to_interact_with_interval.in_seconds = time-1
+        user.has_preference_to_interact_with_interval.in_seconds = time-1000
         #ontology.save("../ontologies/saved.owl")
         #sync_reasoner()
 
@@ -170,6 +173,14 @@ def count():
     with lock:
         update_emoji_frequency(emoji)
         update_user_interaction_interval()
+
+    return ('', 200)
+
+
+@ app.route('/dismiss', methods=['POST'])
+def dismiss():
+    global time_interval
+    time_interval += 5000
     return ('', 200)
 
 
@@ -235,6 +246,25 @@ def video_feed():
     # type (mime type)
     return Response(generate(),
                     mimetype="multipart/x-mixed-replace; boundary=frame")
+
+
+@ app.route('/response')
+def response():
+    global emotion, dictgraphic, time_interval
+    return render_template("index.html", emosh=emotion, emoji=sorted(dictgraphic[emotion], key=counter.get, reverse=True), interval=time_interval)
+
+
+@ app.after_request
+def add_header(r):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
 
 
 # check to see if this is the main thread of execution

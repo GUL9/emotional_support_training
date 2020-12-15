@@ -1,12 +1,13 @@
 * {
   box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 /* Container needed to position the overlay. Adjust the width as needed */
-.container {
+.container, .buttonHolder {
   position: relative;
   width: 50%;
-  max-width: 500px;
+  max-width: 600px;
 }
 
 /* Make the image to responsive */
@@ -22,7 +23,7 @@
 .overlay-bar {
   position: absolute;
   left: 5%;
-  top: 5%;
+  top: 8%;
   background: rgb(0, 0, 0);
   background: rgba(0, 0, 0, 0.5); /* Black see-through */
   color: #f1f1f1;
@@ -30,11 +31,12 @@
   /* height: 130px; */
 
   transition: 0.5s ease;
-  opacity: 0;
+  opacity: 0.5;
   color: white;
-  font-size: 20px;
-  padding: 20px;
+  font-size: 18px;
+  padding: 25px;
   text-align: center;
+  border-radius: 5%;
 }
 
 .overlay-voice {
@@ -44,8 +46,11 @@
 .overlay-bar {
   left: auto;
   top: auto;
+  right: auto;
   bottom: 0;
   width: 100%;
+  padding: 2%;
+  border-radius: 0;
 }
 
 /* When you mouse over the container, fade in the overlay title */
@@ -55,11 +60,68 @@
   opacity: 1;
 }
 
+/* div.sleep {
+  opacity:0.5;
+} */
+
 form {
   display: inline-block;
   background-color: transparent;
+  font-size:32px;
+  margin: 0;
 }
 form:hover {
   background-color: greenyellow;
   cursor: pointer;
+}
+
+input[type=button] {
+  color: white;
+  border: none;
+  background-color: rgb(129, 127, 127);
+  padding: 1% 1%;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 1% 1%;
+  cursor: pointer;
+}
+
+input[type=button]:hover {
+  background-color: rgb(65, 63, 63);
+}
+
+#refresh {
+  background-color: white;
+  color: black;
+}
+
+#refresh:hover {
+  background-color: yellow;
+}
+
+.buttonHolder{ 
+  text-align: center; 
+}
+
+/* Style the button and place it in the middle of the container/image */
+.container .btn {
+  position: absolute;
+  bottom: 18%;
+  left: 85%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: rgb(32, 33, 34);
+  color: white;
+  font-size: 14px;
+  font-family: Helvetica;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.container .btn:hover {
+  background-color: black;
+  color: white;
 }

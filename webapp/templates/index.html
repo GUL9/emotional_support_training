@@ -2,6 +2,7 @@
 
 <head>
   <meta charset="UTF-8">
+
   <title>Emotion Recognition</title>
   <link rel="shortcut icon" href="#">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -10,28 +11,33 @@
 </head>
 
 <body>
-  <h1>Feeling Emosh</h1>
+  <div class="buttonHolder">
+    <h2 style="font-family: Helvetica, Arial, sans-serif;">Emotion Detection Training for Caregivers 🧑‍⚕️</h2>
+  </div>
   <div class="container">
     <img src="{{ url_for('video_feed') }}" class="image" />
 
-    <div class="overlay">Face {{emosh}}</div>
-    <div class="overlay-voice">Voice {{emosh}}</div>
-    <div class="overlay-bar">
-      {% for em in emoji %}
-      <form id="test" method="POST" value="{{em}}"> {{em}} </form>
-      {% endfor %}
+    <div id="overlay">
+      <div class="overlay">Face: {{emosh}}</div>
+      <div class="overlay-voice">Voice: {{emosh}}</div>
+      <button class="btn" id="dismiss" method="POST">Dismiss</button>
+      <!-- onclick="hide()" -->
+      <div class=" overlay-bar">
+        {% for em in emoji %}
+        <form id="vote" method="POST" value="{{loop.index}}"> {{em}} </form>
+        {% endfor %}
+      </div>
     </div>
+
+  </div>
+  <div class="buttonHolder">
+    <input onclick="window.location='/response';" type="button" value="Refresh" id=refresh>
   </div>
 
   <script type=text/javascript>
             $(function() {
-              $('form#test').on('click', function(e) {
+              $('form#vote').on('click', function(e) {
                 e.preventDefault()
-                // $.getJSON('/count/{{targ}}',
-                //     function(data) {
-                //       print(data)
-                //   //do nothing
-                // });
                 $.ajax({
                         type: 'POST',
                         url: '/count',
@@ -48,16 +54,47 @@
               });
               
             });
-    </script>
-    <script>
-      window.setInterval('refresh()', {{interval}}*1000); 	
-  
-      // Refresh or reload page.
-      function refresh() {
-          window .location.reload();
-      }
+  </script>
+  <script type=text/javascript>
+    $(function() {
+      $('button#dismiss').on('click', function(e) {
+        e.preventDefault()
+        $.ajax({
+                type: 'POST',
+                url: '/dismiss',
+                data: 'nothing',
+                success: function() {
+                    
+                },
+                error: function() {
+                    alert("Oops! Something went wrong.");
+                }
+        });
+        var button = document.getElementById('refresh');
+        var x = document.getElementById('overlay');
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+        if (button.value == 'Refresh') {
+          button.value = 'Show'
+        } else {
+          button.value = 'Refresh'
+        }
+        return false;
+      });
+    });
   </script>
 
+  <script>
+    window.setInterval('refresh()', {{ interval }});
+
+    // Refresh or reload page.
+    function refresh() {
+      window.location.reload();
+    }
+  </script>
 </body>
 
 </html>
