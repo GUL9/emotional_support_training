@@ -18,12 +18,12 @@
     <img src="{{ url_for('video_feed') }}" class="image" />
 
     <div id="overlay">
-      <div class="overlay">Face: {{emosh}}</div>
-      <div class="overlay-voice">Voice: {{emosh}}</div>
+      <div class="overlay" >Face: <p id=emosh>{{emosh}}</p></div>
+      <div class="overlay-voice" >Voice: <p id=emosh>{{emosh}}</p></div>
       <button class="btn" id="dismiss" method="POST">Dismiss</button>
-      <!-- onclick="hide()" -->
-      <div class=" overlay-bar">
-        {% for em in emoji %}
+      <div class=" overlay-bar" id="emoji">
+        {% set emoji_global = emoji %}
+        {% for em in emoji_global %}
         <form id="vote" method="POST" value="{{loop.index}}"> {{em}} </form>
         {% endfor %}
       </div>
@@ -31,19 +31,42 @@
 
   </div>
   <div class="buttonHolder">
-    <input onclick="window.location='/';" type="button" value="Refresh" id=refresh>
+    <input onclick="update_values()" type="button" value="Refresh" id=refresh style="display:inline-block;">
+    <input onclick="show()" type="button" value="Show" id=show style="display:none;">
   </div>
+  <div><p id=interval>interval</p></div>
+  
+
+  <script type=text/javascript>
+
+    function update_values() {
+            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+            $.getJSON($SCRIPT_ROOT+"/_stuff",
+                function(data) {
+                  data_emojis = data.emoji;
+                  $("#emosh").html(data.emosh)
+                  
+                  // update emoji bar
+                  $('form#vote').each(function(index){
+                    $(this).html(data.emoji[index])
+                  })
+
+                  // $("#interval").append(data.interval)
+                  setTimeout('update_values()', parseInt(data.interval));
+                });   
+    }
+  </script>
 
   <script type=text/javascript>
             $(function() {
-              $('form#vote').on('click', function(e) {
+              $('body').on('click' , 'form#vote',function(e) {
                 e.preventDefault()
                 $.ajax({
                         type: 'POST',
                         url: '/count',
                         data: {'data': e.target.innerHTML},
                         success: function() {
-                            alert(e.target.innerHTML+' gets an upvote!');
+                            update_values()
                         },
                         error: function() {
                             alert("Oops! Something went wrong.");
@@ -57,7 +80,7 @@
   </script>
   <script type=text/javascript>
     $(function() {
-      $('button#dismiss').on('click', function(e) {
+      $('body').on('click', 'button#dismiss',function(e) {
         e.preventDefault()
         $.ajax({
                 type: 'POST',
@@ -70,30 +93,44 @@
                     alert("Oops! Something went wrong.");
                 }
         });
-        var button = document.getElementById('refresh');
+        var button = document.getElementById('show');
+        var refresh_button = document.getElementById('refresh');
         var x = document.getElementById('overlay');
         if (x.style.display === "none") {
           x.style.display = "block";
         } else {
           x.style.display = "none";
         }
-        if (button.value == 'Refresh') {
-          button.value = 'Show'
+        if (button.style.display === "none") {
+          button.style.display = 'inline-block'
         } else {
-          button.value = 'Refresh'
+          button.style.display = 'none'
         }
+        refresh_button.style.display = 'none';
+
         return false;
       });
     });
   </script>
 
-  <script>
-    window.setInterval('refresh()', {{ interval }});
-
-    // Refresh or reload page.
-    function refresh() {
-      window.location.reload();
-    }
+  <script type=text/javascript>
+    function show() {
+          var button = document.getElementById('show');
+          var refresh_button = document.getElementById('refresh');
+          var x = document.getElementById('overlay');
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          } else {
+            x.style.display = "none";
+          }
+          if (button.style.display === "none") {
+            button.style.display = 'inline-block'
+          } else {
+            button.style.display = 'none'
+          }
+          
+          refresh_button.style.display = 'inline-block'
+        }
   </script>
 </body>
 

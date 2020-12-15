@@ -2,11 +2,7 @@
 
 # import the necessary packages
 from imutils.video import VideoStream
-from flask import Response
-from flask import Flask
-from flask import render_template
-from flask import request
-from flask import redirect, url_for
+from flask import Response, Flask, render_template, request, redirect, url_for, jsonify
 import threading
 import argparse
 import datetime
@@ -23,8 +19,6 @@ from owlready2 import *
 # exchanges of the output frames (useful when multiple browsers/tabs
 # are viewing the stream)
 
-
-
 outputFrame = None
 lock = threading.Lock()
 # initialize a flask object
@@ -38,11 +32,11 @@ time.sleep(2.0)
 time_interval = 5000
 active_emotions = ['happy', 'neutral', 'angry', 'sad']
 active_emojis = {
-               'happy': ['😊', '😃', '😄', '😁', '😆', '😉'],
-               'angry': ['😤', '😠', '😡', '🤬', '😒', '😣'],
-               'sad': ['☹️', '😢', '😭', '😟', '😥'],
-               'neutral': ['🙂', '😐', '🧐', '😑'],
-               }
+    'happy': ['😊', '😃', '😄', '😁', '😆', '😉'],
+    'angry': ['😤', '😠', '😡', '🤬', '😒', '😣'],
+    'sad': ['☹️', '😢', '😭', '😟', '😥'],
+    'neutral': ['🙂', '😐', '🧐', '😑'],
+}
 
 ontology = None
 patient = None
@@ -61,12 +55,14 @@ def init_ontology():
         )
         # init User
         user = ontology.User(
-            has_preference_to_interact_with_interval=ontology.Time(in_seconds=time_interval)
+            has_preference_to_interact_with_interval=ontology.Time(
+                in_seconds=time_interval)
         )
         # init Emojis
         for emotion_type in active_emojis.keys():
             for emoji_type in active_emojis[emotion_type]:
-                ontology.Emoji(type_of_emotion=emotion_type, type_of_emoji=emoji_type, usage_frequency=0)
+                ontology.Emoji(type_of_emotion=emotion_type,
+                               type_of_emoji=emoji_type, usage_frequency=0)
         # Reason
         ontology.save("../ontologies/saved.owl")
         sync_reasoner()
@@ -85,6 +81,7 @@ def update_patient_expressions(facial_expression, voice_expression):
         if changed:
             sync_reasoner()
             ontology.save("../ontologies/saved.owl")
+
 
 def get_emoji_from_emotion(emo):
     global ontology
@@ -112,6 +109,7 @@ def generate_emoji_list():
             voice_emojis = get_emoji_from_emotion(voice_expression)
 
             emojis = []
+
             def sort_frequency(emoji):
                 if emoji.usage_frequency != None:
                     return emoji.usage_frequency
@@ -139,7 +137,8 @@ def update_emoji_frequency(emoji_type):
         for emoji in ontology.Emoji.instances():
             if emoji.type_of_emoji in emoji_type:
                 emoji.usage_frequency += 1
-                print("Usage Frequency for" + emoji_type +  str(emoji.usage_frequency))
+                # print("Usage Frequency for" + emoji_type +
+                #       str(emoji.usage_frequency))
 
 
 def update_user_interaction_interval(input_type):
@@ -151,20 +150,21 @@ def update_user_interaction_interval(input_type):
     if input_type == "dismiss":
         if user.has_preference_to_interact_with_interval.in_seconds < 60000:
             user.has_preference_to_interact_with_interval.in_seconds += 5000
-    print("Current time interval: " + str(user.has_preference_to_interact_with_interval.in_seconds))
+    # print("Current time interval: " +
+    #       str(user.has_preference_to_interact_with_interval.in_seconds))
 
 
 @ app.route("/")
 def index():
-    print("index")
-    global patient
+    # print("index")
+    global patient, user
     # return the rendered template
     with lock:
         emojis = generate_emoji_list()
     return render_template("index.html",
-           emosh=patient.has_facial_expression.type_of_emotion,
-           emoji=emojis,
-           interval=user.has_preference_to_interact_with_interval.in_seconds)
+                           emosh=patient.has_facial_expression.type_of_emotion,
+                           emoji=emojis,
+                           interval=user.has_preference_to_interact_with_interval.in_seconds)
 
 
 @ app.route('/count', methods=['POST'])
@@ -173,7 +173,6 @@ def count():
     with lock:
         update_emoji_frequency(emoji)
         update_user_interaction_interval("emoji")
-
     return ('', 200)
 
 
@@ -182,6 +181,15 @@ def dismiss():
     with lock:
         update_user_interaction_interval("dismiss")
     return ('', 200)
+
+
+@app.route('/_stuff', methods=['GET'])
+def stuff():
+    global patient, user
+    with lock:
+        emojis = generate_emoji_list()
+
+    return jsonify(emosh=patient.has_facial_expression.type_of_emotion, emoji=emojis, interval=user.has_preference_to_interact_with_interval.in_seconds)
 
 
 def detect_emotion(frameCount):
@@ -204,9 +212,10 @@ def detect_emotion(frameCount):
         result = DeepFace.analyze(
             outputFrame, actions=['emotion'], enforce_detection=False)
 
-        result = {key:value for (key,value) in result['emotion'].items() if key in active_emotions}
+        result = {key: value for (
+            key, value) in result['emotion'].items() if key in active_emotions}
         emotion = max(result, key=lambda emotion: result[emotion])
-        print(emotion)
+        # print(emotion)
         with lock:
             update_patient_expressions(emotion, emotion)
 
@@ -242,6 +251,7 @@ def video_feed():
     # type (mime type)
     return Response(generate(),
                     mimetype="multipart/x-mixed-replace; boundary=frame")
+
 
 @ app.after_request
 def add_header(r):

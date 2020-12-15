@@ -4,7 +4,8 @@
 }
 
 /* Container needed to position the overlay. Adjust the width as needed */
-.container, .buttonHolder {
+.container,
+.buttonHolder {
   position: relative;
   width: 50%;
   max-width: 600px;
@@ -67,7 +68,7 @@
 form {
   display: inline-block;
   background-color: transparent;
-  font-size:32px;
+  font-size: 32px;
   margin: 0;
 }
 form:hover {
@@ -75,7 +76,7 @@ form:hover {
   cursor: pointer;
 }
 
-input[type=button] {
+input[type="button"] {
   color: white;
   border: none;
   background-color: rgb(129, 127, 127);
@@ -87,21 +88,23 @@ input[type=button] {
   cursor: pointer;
 }
 
-input[type=button]:hover {
+input[type="button"]:hover {
   background-color: rgb(65, 63, 63);
 }
 
-#refresh {
+#refresh,
+#show {
   background-color: white;
   color: black;
 }
 
-#refresh:hover {
+#refresh:hover,
+#show:hover {
   background-color: yellow;
 }
 
-.buttonHolder{ 
-  text-align: center; 
+.buttonHolder {
+  text-align: center;
 }
 
 /* Style the button and place it in the middle of the container/image */
