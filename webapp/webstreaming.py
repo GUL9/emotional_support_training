@@ -2,11 +2,7 @@
 
 # import the necessary packages
 from imutils.video import VideoStream
-from flask import Response
-from flask import Flask
-from flask import render_template
-from flask import request
-from flask import redirect, url_for
+from flask import Response, Flask, render_template, request, redirect, url_for, jsonify
 import threading
 import argparse
 import datetime
@@ -86,13 +82,12 @@ def init_ontology():
             has_voice_expression=ontology.Emotion(type_of_emotion=NEUTRAL)
         )
         # init User: default time interval
-        user = ontology.User(
-            has_preference_to_interact_with_interval=ontology.Time(in_seconds=DEFAULT_TIME_INTERVAL)
-        )
+        user = ontology.User(has_preference_to_interact_with_interval=ontology.Time(in_seconds=DEFAULT_TIME_INTERVAL))
         # init Emojis: corresponding emotion type and 0 frequency
         for emotion_type in active_emojis.keys():
             for emoji_type in active_emojis[emotion_type]:
-                ontology.Emoji(type_of_emotion=emotion_type, type_of_emoji=emoji_type, usage_frequency=0)
+                ontology.Emoji(type_of_emotion=emotion_type,
+                               type_of_emoji=emoji_type, usage_frequency=0)
         # Reason
         ontology.save(PATH_TO_SAVE_REASONED_ONTOLOGY)
         sync_reasoner()
@@ -137,7 +132,6 @@ def generate_emoji_list():
     with ontology:
         facial_expression = patient.has_facial_expression.type_of_emotion
         voice_expression = patient.has_voice_expression.type_of_emotion
-
         #Get all emojis of corresponding expressions
         face_emojis = get_emoji_from_emotion(facial_expression)
         voice_emojis = get_emoji_from_emotion(voice_expression)
@@ -177,7 +171,6 @@ def update_emoji_frequency(emoji_type):
                 ontology.save("ontologies/saved.owl")
 
 
-
 def update_user_interaction_interval(input_type):
     # Increment or decrement interaction time interval
     global user
@@ -194,15 +187,13 @@ def update_user_interaction_interval(input_type):
     print("Current time interval: " + str(user.has_preference_to_interact_with_interval.in_seconds))
 
 
+
 @ app.route("/")
 def index():
-    global patient, user, should_classify_voice, should_classify_face, ontology_lock
+    global patient, user, ontology_lock
     # return the rendered template
-    should_classify_voice = True
-    should_classify_face = True
     with ontology_lock:
         emojis = generate_emoji_list()
-        #emojis = []
     return render_template("index.html",
            face=patient.has_facial_expression.type_of_emotion,
            voice=patient.has_voice_expression.type_of_emotion,
@@ -228,10 +219,10 @@ def dismiss():
     return ('', 200)
 
 def detect_voice_expression():
-    global should_classify_voice, user, ontology_lock
+    global user, ontology_lock
     while True:
-        if should_classify_voice:
             # Record to file until nex interval
+            print("Starting voice classification")
             with ontology_lock:
                 record_time = user.has_preference_to_interact_with_interval.in_seconds/1000 - 0.2
             test.record_to_file(PATH_TO_SOUND_FILE, record_time)
@@ -241,7 +232,7 @@ def detect_voice_expression():
 
             with ontology_lock:
                 update_patient_voice_expressions(emotion)
-            should_classify_voice = False
+
 
 def detect_face_expression(frameCount):
     # grab global references to the video stream, output frame, and
@@ -264,6 +255,7 @@ def detect_face_expression(frameCount):
         with ontology_lock:
             accumulation_time = user.has_preference_to_interact_with_interval.in_seconds/1000 - 0.2
         stop_time = time.time() + accumulation_time
+        print("Starting face classification")
         # Accumulate emotion scores until next interaction
         accumulation = DeepFace.analyze(outputFrame, actions=['emotion'], enforce_detection=False)['emotion']
         while time.time() < stop_time:
@@ -276,6 +268,7 @@ def detect_face_expression(frameCount):
         print("Face: " + emotion)
         with ontology_lock:
             update_patient_facial_expressions(emotion)
+
 
 def generate():
     # grab global references to the output frame and lock variables
@@ -301,6 +294,17 @@ def generate():
         yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' +
               bytearray(encodedImage) + b'\r\n')
 
+@app.route('/_stuff', methods=['GET'])
+def stuff():
+    global patient, user, ontology_lock
+    with ontology_lock:
+        emojis = generate_emoji_list()
+
+    return jsonify(face=patient.has_facial_expression.type_of_emotion,
+                   voice=patient.has_voice_expression.type_of_emotion,
+                   emojis=emojis,
+                   interval=user.has_preference_to_interact_with_interval.in_seconds)
+
 
 @ app.route("/video_feed")
 def video_feed():
@@ -308,6 +312,7 @@ def video_feed():
     # type (mime type)
     return Response(generate(),
                     mimetype="multipart/x-mixed-replace; boundary=frame")
+
 
 @ app.after_request
 def add_header(r):
