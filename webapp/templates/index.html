@@ -18,8 +18,10 @@
     <img src="{{ url_for('video_feed') }}" class="image" />
 
     <div id="overlay">
-      <div class="overlay" >Face: <p id=emosh>{{emosh}}</p></div>
-      <div class="overlay-voice" >Voice: <p id=emosh>{{emosh}}</p></div>
+      <div class="overlay">Face: <p id=emosh>{{emosh}}</p>
+      </div>
+      <div class="overlay-voice">Voice: <p id=emosh>{{emosh}}</p>
+      </div>
       <button class="btn" id="dismiss" method="POST">Dismiss</button>
       <div class=" overlay-bar" id="emoji">
         {% set emoji_global = emoji %}
@@ -34,8 +36,10 @@
     <input onclick="update_values()" type="button" value="Refresh" id=refresh style="display:inline-block;">
     <input onclick="show()" type="button" value="Show" id=show style="display:none;">
   </div>
-  <div><p id=interval>interval</p></div>
-  
+  <div>
+    <p id=interval>current interval: {{interval}}</p>
+  </div>
+
 
   <script type=text/javascript>
 
@@ -51,7 +55,7 @@
                     $(this).html(data.emoji[index])
                   })
 
-                  // $("#interval").append(data.interval)
+                  $("#interval").text("current interval: "+data.interval)
                   setTimeout('update_values()', parseInt(data.interval));
                 });   
     }
