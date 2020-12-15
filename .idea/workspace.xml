@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97b40c32-e467-478d-8312-23dd005b41c8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/ontologies/saved.owl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/sound/soundfile.wav" beforeDir="false" afterPath="$PROJECT_DIR$/webapp/sound/soundfile.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/webapp/static/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webapp/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/webapp/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webapp/webstreaming.py" beforeDir="false" afterPath="$PROJECT_DIR$/webapp/webstreaming.py" afterDir="false" />
     </list>
@@ -107,7 +103,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/webapp/webstreaming.py</url>
-          <line>298</line>
+          <line>316</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
@@ -121,6 +117,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/emotional_support_training$webstreaming.coverage" NAME="webstreaming Coverage Results" MODIFIED="1608070821920" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/webapp" />
+    <SUITE FILE_PATH="coverage/emotional_support_training$webstreaming.coverage" NAME="webstreaming Coverage Results" MODIFIED="1608070900603" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/webapp" />
   </component>
 </project>

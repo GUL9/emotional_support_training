@@ -20,6 +20,7 @@
     <div id="overlay">
       <div class="overlay" >Face: <p id=face>{{face}}</p></div>
       <div class="overlay-voice" >Voice: <p id=voice>{{voice}}</p></div>
+
       <button class="btn" id="dismiss" method="POST">Dismiss</button>
       <div class=" overlay-bar" id="emoji">
         {% set emoji_global = emojis %}
@@ -30,18 +31,21 @@
     </div>
 
   </div>
+  <div>
+    <p id=interval style="font-size: 10; font-style: italic; color: gray;">current interval: {{interval}}</p>
+  </div>
   <div class="buttonHolder">
-    <input onclick="update_values()" type="button" value="Refresh" id=refresh style="display:inline-block;">
+    <input onclick="update_overlay() " type="button" value="Refresh" id=refresh style="display:inline-block;">
     <input onclick="show()" type="button" value="Show" id=show style="display:none;">
   </div>
-  <div><p id=interval>interval</p></div>
-  
 
+  <script type='text/javascript'>
+    var globalTimeInt;
+  </script>
   <script type=text/javascript>
-
-    function update_values() {
+    function update_overlay() {
             $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-            $.getJSON($SCRIPT_ROOT+"/_stuff",
+            $.getJSON($SCRIPT_ROOT+"/_update",
                 function(data) {
                   data_emojis = data.emojis;
                   $("#face").html(data.face)
@@ -52,11 +56,17 @@
                     $(this).html(data.emojis[index])
                   })
 
-                  // $("#interval").append(data.interval)
-                  setTimeout('update_values()', parseInt(data.interval));
-
+                  if (globalTimeInt !== null) {
+                    clearTimeout(globalTimeInt);
+                  }
+                  $("#interval").text("current interval: "+data.interval)
+                  globalTimeInt = setTimeout(update_overlay, parseInt(data.interval));
                 });   
     }
+  </script>
+  <script>
+    // initiate regular overlay update
+    update_overlay();
   </script>
 
   <script type=text/javascript>
@@ -68,13 +78,12 @@
                         url: '/count',
                         data: {'data': e.target.innerHTML},
                         success: function() {
-                            update_values()
+                          update_overlay(); 
                         },
                         error: function() {
                             alert("Oops! Something went wrong.");
                         }
                 });
-                
                 return false;
               });
               
@@ -150,7 +159,6 @@
           } else {
             button.style.display = 'none'
           }
-          
           refresh_button.style.display = 'inline-block'
         }
   </script>

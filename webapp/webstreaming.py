@@ -36,6 +36,14 @@ app = Flask(__name__)
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
 
+time_interval = 5000
+active_emotions = ['happy', 'neutral', 'angry', 'sad']
+active_emojis = {
+    'happy': ['😊', '😃', '😄', '😁', '😆', '😉'],
+    'angry': ['😤', '😠', '😡', '🤬', '😒', '😣'],
+    'sad': ['😔', '😢', '😭', '😟', '😥', '🥺'],
+    'neutral': ['🙂', '😐', '🧐', '😑', '🧑', '👩'],
+}
 
 VOICE_MODEL = pickle.load(open("speechRecognition/result/mlp_classifier.model", "rb"))
 PATH_TO_ONTOLOGY = "ontologies/ontology.owl"
@@ -294,7 +302,7 @@ def generate():
         yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' +
               bytearray(encodedImage) + b'\r\n')
 
-@app.route('/_stuff', methods=['GET'])
+@app.route('/_update', methods=['GET'])
 def stuff():
     global patient, user, ontology_lock
     with ontology_lock:
