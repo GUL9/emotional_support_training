@@ -20,7 +20,7 @@ import atexit
 # initialize the output frame and a lock used to ensure thread-safe
 # exchanges of the output frames (useful when multiple browsers/tabs
 # are viewing the stream)
-time_interval = 10
+time_interval = 10000
 start_time = 0
 outputFrame = None
 lock = threading.Lock()
@@ -83,11 +83,17 @@ def index():
 @ app.route('/count', methods=['POST'])
 def count():
     global time_interval
-   # delete
     id = request.form['data']
     counter[id.strip()] += 1
-    if time_interval > 5:
-        time_interval -= 1
+    if time_interval > 5000:
+        time_interval -= 2000
+    return ('', 200)
+
+
+@ app.route('/dismiss', methods=['POST'])
+def dismiss():
+    global time_interval
+    time_interval += 5000
     return ('', 200)
 
 
@@ -152,6 +158,19 @@ def video_feed():
 def response():
     global emotion, dictgraphic, time_interval
     return render_template("index.html", emosh=emotion, emoji=sorted(dictgraphic[emotion], key=counter.get, reverse=True), interval=time_interval)
+
+
+@ app.after_request
+def add_header(r):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
 
 
 # check to see if this is the main thread of execution
