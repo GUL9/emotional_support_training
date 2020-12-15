@@ -19,6 +19,9 @@ import atexit
 import owlready2
 from owlready2 import *
 
+#import speechRecognition.test
+#import speechRecognition.utils
+
 # initialize the output frame and a lock used to ensure thread-safe
 # exchanges of the output frames (useful when multiple browsers/tabs
 # are viewing the stream)
@@ -35,6 +38,8 @@ app = Flask(__name__)
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
 
+PATH_TO_SOUND_FILE = "sound/soundfile.wav"
+should_classify_voice = False
 # Time intervals
 DEFAULT_TIME_INTERVAL = 5000
 MAX_TIME_INTERVAL = 30000
@@ -64,7 +69,7 @@ user = None
 
 def init_ontology():
     global ontology, patient, user
-    ontology = get_ontology("../ontologies/ontology.owl").load()
+    ontology = get_ontology("ontologies/ontology.owl").load()
     with ontology:
         # init Patient: neutral expressions
         patient = ontology.Patient(
@@ -81,24 +86,27 @@ def init_ontology():
             for emoji_type in active_emojis[emotion_type]:
                 ontology.Emoji(type_of_emotion=emotion_type, type_of_emoji=emoji_type, usage_frequency=0)
         # Reason
-        ontology.save("../ontologies/saved.owl")
+        ontology.save("ontologies/saved.owl")
         sync_reasoner()
 
 
-def update_patient_expressions(facial_expression, voice_expression):
+def update_patient_facial_expressions(facial_expression):
     # Update if expression has changed; reason if updated
     global ontology, patient
     with ontology:
-        changed = False
         if patient.has_facial_expression.type_of_emotion != facial_expression:
             patient.has_facial_expression.type_of_emotion = facial_expression
-            changed = True
+            sync_reasoner()
+            ontology.save("ontologies/saved.owl")
+
+def update_patient_voice_expressions(voice_expression):
+    # Update if expression has changed; reason if updated
+    global ontology, patient
+    with ontology:
         if patient.has_voice_expression.type_of_emotion != voice_expression:
             patient.has_voice_expression.type_of_emotion = voice_expression
-            changed = True
-        if changed:
             sync_reasoner()
-            ontology.save("../ontologies/saved.owl")
+            ontology.save("ontologies/saved.owl")
 
 def get_emoji_from_emotion(emotion):
     # Returns list of all Emoji-instances for given emotion
@@ -176,10 +184,11 @@ def update_user_interaction_interval(input_type):
 
 @ app.route("/")
 def index():
-    global patient
+    global patient, user
     # return the rendered template
     with lock:
         emojis = generate_emoji_list()
+        should_classify_voice = True
     return render_template("index.html",
            emosh=patient.has_facial_expression.type_of_emotion,
            emoji=emojis,
@@ -202,6 +211,23 @@ def dismiss():
         update_user_interaction_interval(DISMISS)
     return ('', 200)
 
+def detect_voice_expression():
+    while true:
+        if should_classify_voice:
+            # load the saved model (after training)
+            model = pickle.load(open("speechRecognition/result/mlp_classifier.model", "rb"))
+            print("Please talk")
+            # record the file (start talking)
+            record_to_file(PATH_TO_SOUND_FILE)
+            # extract features and reshape it
+            features = extract_feature(PATH_TO_SOUND_FILE, mfcc=True, chroma=True, mel=True).reshape(1, -1)
+            # predict
+            result = model.predict(features)[0]
+            # show the result !
+            print("result:", result)
+            with lock:
+                update_patient_voice_expressions(result)
+                should_classify_voice = False
 
 def detect_emotion(frameCount):
     # grab global references to the video stream, output frame, and
@@ -227,7 +253,8 @@ def detect_emotion(frameCount):
         emotion = max(result, key=lambda emotion: result[emotion])
         print(emotion)
         with lock:
-            update_patient_expressions(emotion, emotion)
+            update_patient_facial_expressions(emotion)
+            update_patient_voice_expressions(emotion)
 
 
 def generate():
@@ -296,6 +323,9 @@ if __name__ == '__main__':
         args["frame_count"],))
     t.daemon = True
     t.start()
+    #t2 = threading.Thread(target=detect_voice_expression)
+    #t2.daemon = True
+    #t2.start()
 
     # start the flask app
     app.run(host=args["ip"], port=args["port"], debug=True,

@@ -20,13 +20,13 @@ int2emotion = {
 # we allow only these emotions
 AVAILABLE_EMOTIONS = {
     "neutral",
-    "calm",
+    #"calm",
     "happy",
     "sad",
     "angry",
     #"fearful",
     #"disgust",
-    "surprised"
+    #"surprised"
 }
 
 def extract_feature(file_name, **kwargs):
