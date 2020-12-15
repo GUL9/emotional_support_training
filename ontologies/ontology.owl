@@ -134,7 +134,7 @@
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#in_seconds">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Time"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
     </owl:DatatypeProperty>
     
 
@@ -161,8 +161,7 @@
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#type_of_emotion">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#type"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Emoji"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/anton/ontologies/2020/11/untitled-ontology-9#Emotion"/>
+        <rdfs:domain rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     

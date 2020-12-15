@@ -34,15 +34,13 @@ app = Flask(__name__)
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
 active_emotions = ['happy', 'neutral', 'angry', 'sad']
-emotion = 'emosh'
-dictgraphic = {'emosh': ['🙃'],
+emotion = 'neutral'
+dictgraphic = {
                'happy': ['😊', '😃', '😄', '😁', '😆', '😉'],
                'angry': ['😤', '😠', '😡', '🤬', '😒', '😣'],
                'sad': ['☹️', '😢', '😭', '😟', '😥'],
                'neutral': ['🙂', '😐', '🧐', '😑'],
-               'disgust': ['🤢', '🤮', '😣', '😖'],
-               'fear': ['😨', '😰', '😥', '😓'],
-               'surprise': ['😱']}
+               }
 counter = {'🙃': 0,
            '😊': 0,
            '😃': 0,
@@ -98,18 +96,23 @@ def init_ontology():
             for emoji_type in dictgraphic[emotion_type]:
                 ontology.Emoji(type_of_emotion=emotion_type, type_of_emoji=emoji_type, usage_frequency=0)
         # Reason
+        ontology.save("../ontologies/saved.owl")
         sync_reasoner()
 
 
 def update_patient_expressions(facial_expression, voice_expression):
     global ontology, patient
     with ontology:
+        changed = False
         if patient.has_facial_expression.type_of_emotion != facial_expression:
             patient.has_facial_expression.type_of_emotion = facial_expression
-            sync_reasoner()
+            changed = True
         if patient.has_voice_expression.type_of_emotion != voice_expression:
             patient.has_voice_expression.type_of_emotion = voice_expression
+            changed = True
+        if changed:
             sync_reasoner()
+            ontology.save("../ontologies/saved.owl")
 
 def get_emoji_from_emotion(emo):
     global ontology
@@ -165,7 +168,8 @@ def update_emoji_frequency(emoji_type):
             if emoji.type_of_emoji == emoji_type:
                 emoji.usage_frequency += 1
                 print(emoji.usage_frequency)
-                sync_reasoner()
+                #ontology.save("../ontologies/saved.owl")
+                #sync_reasoner()
 
 
 def update_user_interaction_interval():
@@ -174,7 +178,8 @@ def update_user_interaction_interval():
         time = user.has_preference_to_interact_with_interval.in_seconds
         print("Current time interval: " + str(time))
         user.has_preference_to_interact_with_interval.in_seconds = time-1
-        sync_reasoner()
+        #ontology.save("../ontologies/saved.owl")
+        #sync_reasoner()
 
 
 @ app.route("/")
