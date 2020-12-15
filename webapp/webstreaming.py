@@ -56,8 +56,8 @@ def init_ontology():
         # init Patient
         patient = ontology.Patient(
             has_state=[ontology.State()],
-            has_facial_expression=ontology.Emotion(type_of_emotion="none"),
-            has_voice_expression=ontology.Emotion(type_of_emotion="none")
+            has_facial_expression=ontology.Emotion(type_of_emotion="neutral"),
+            has_voice_expression=ontology.Emotion(type_of_emotion="neutral")
         )
         # init User
         user = ontology.User(
@@ -140,18 +140,18 @@ def update_emoji_frequency(emoji_type):
             if emoji.type_of_emoji in emoji_type:
                 emoji.usage_frequency += 1
                 print("Usage Frequency for" + emoji_type +  str(emoji.usage_frequency))
-                #ontology.save("../ontologies/saved.owl")
-                #sync_reasoner()
 
 
-def update_user_interaction_interval():
+def update_user_interaction_interval(input_type):
     global user
-    if user.has_preference_to_interact_with_interval.in_seconds > 3000:
-        time = user.has_preference_to_interact_with_interval.in_seconds
-        print("Current time interval: " + str(time))
-        user.has_preference_to_interact_with_interval.in_seconds = time-1000
-        #ontology.save("../ontologies/saved.owl")
-        #sync_reasoner()
+    if input_type == "emoji":
+        if user.has_preference_to_interact_with_interval.in_seconds > 3000:
+            user.has_preference_to_interact_with_interval.in_seconds -= 1000
+
+    if input_type == "dismiss":
+        if user.has_preference_to_interact_with_interval.in_seconds < 60000:
+            user.has_preference_to_interact_with_interval.in_seconds += 5000
+    print("Current time interval: " + str(user.has_preference_to_interact_with_interval.in_seconds))
 
 
 @ app.route("/")
@@ -172,21 +172,19 @@ def count():
     emoji = request.form['data']
     with lock:
         update_emoji_frequency(emoji)
-        update_user_interaction_interval()
+        update_user_interaction_interval("emoji")
 
     return ('', 200)
 
 
 @ app.route('/dismiss', methods=['POST'])
 def dismiss():
-    global time_interval
-    time_interval += 5000
+    with lock:
+        update_user_interaction_interval("dismiss")
     return ('', 200)
 
 
 def detect_emotion(frameCount):
-    print("detect_emotion")
-
     # grab global references to the video stream, output frame, and
     # lock variables
     global vs, outputFrame,  patient
@@ -214,8 +212,6 @@ def detect_emotion(frameCount):
 
 
 def generate():
-    print("generate")
-
     # grab global references to the output frame and lock variables
     global outputFrame, lock
 
@@ -247,13 +243,6 @@ def video_feed():
     return Response(generate(),
                     mimetype="multipart/x-mixed-replace; boundary=frame")
 
-
-@ app.route('/response')
-def response():
-    global emotion, dictgraphic, time_interval
-    return render_template("index.html", emosh=emotion, emoji=sorted(dictgraphic[emotion], key=counter.get, reverse=True), interval=time_interval)
-
-
 @ app.after_request
 def add_header(r):
     """
@@ -280,7 +269,7 @@ if __name__ == '__main__':
                     help="# of frames used to construct the background model")
     args = vars(ap.parse_args())
 
-    # read and inits the ontology
+    # read and init the ontology
     init_ontology()
 
     # start a thread that will perform emotion detection
