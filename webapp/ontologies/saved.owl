@@ -327,7 +327,7 @@
 
 <Emotion rdf:about="#emotion1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">angry</type_of_emotion>
+  <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sad</type_of_emotion>
 </Emotion>
 
 <Emotion rdf:about="#emotion2">

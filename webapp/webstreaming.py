@@ -31,8 +31,6 @@ import speechRecognition.utils as utils
 
 outputFrame = None
 lock = threading.Lock()
-user_lock = threading.Lock()
-patient_lock = threading.Lock()
 ontology_lock = threading.Lock()
 # initialize a flask object
 app = Flask(__name__)
@@ -136,34 +134,32 @@ def generate_emoji_list():
     with ontology:
         facial_expression = patient.has_facial_expression.type_of_emotion
         voice_expression = patient.has_voice_expression.type_of_emotion
-        if facial_expression == None or voice_expression == None:
-            return []
+
+        #Get all emojis of corresponding expressions
+        face_emojis = get_emoji_from_emotion(facial_expression)
+        voice_emojis = get_emoji_from_emotion(voice_expression)
+
+        emojis = []
+        def sort_frequency(emoji):
+            if emoji.usage_frequency != None:
+                return emoji.usage_frequency
+            return 0
+        # When expressions differ; pick 2 from each
+        if facial_expression != voice_expression:
+            face_emojis.sort(key=sort_frequency, reverse=True)
+            voice_emojis.sort(key=sort_frequency, reverse=True)
+            frequent_emojis = face_emojis[:2]+voice_emojis[:2]
+            frequent_emojis.sort(key=sort_frequency, reverse=True)
+            for emoji in frequent_emojis:
+                emojis.append(emoji.type_of_emoji)
+        # When expressions are the same; pick 4 from one
         else:
-            #Get all emojis of corresponding expressions
-            face_emojis = get_emoji_from_emotion(facial_expression)
-            voice_emojis = get_emoji_from_emotion(voice_expression)
+            face_emojis.sort(key=sort_frequency, reverse=True)
+            frequent_emojis = face_emojis[:4]
+            for emoji in frequent_emojis:
+                emojis.append(emoji.type_of_emoji)
 
-            emojis = []
-            def sort_frequency(emoji):
-                if emoji.usage_frequency != None:
-                    return emoji.usage_frequency
-                return 0
-            # When expressions differ; pick 2 from each
-            if facial_expression != voice_expression:
-                face_emojis.sort(key=sort_frequency, reverse=True)
-                voice_emojis.sort(key=sort_frequency, reverse=True)
-                frequent_emojis = face_emojis[:2].append(voice_emojis[:2])
-                frequent_emojis.sort(key=sort_frequency, reverse=True)
-                for emoji in frequent_emojis:
-                    emojis.append(emoji.type_of_emoji)
-            # When expressions are the same; pick 4 from one
-            else:
-                face_emojis.sort(key=sort_frequency, reverse=True)
-                frequent_emojis = face_emojis[:4]
-                for emoji in frequent_emojis:
-                    emojis.append(emoji.type_of_emoji)
-
-            return emojis
+        return emojis
 
 
 def update_emoji_frequency(emoji_type):
@@ -193,10 +189,10 @@ def update_user_interaction_interval(input_type):
 def index():
     global patient, user, should_classify_voice, ontology_lock
     # return the rendered template
+    should_classify_voice = True
     with ontology_lock:
-        should_classify_voice = True
-        #emojis = generate_emoji_list()
-        emojis = []
+        emojis = generate_emoji_list()
+        #emojis = []
     return render_template("index.html",
            face=patient.has_facial_expression.type_of_emotion,
            voice=patient.has_voice_expression.type_of_emotion,
@@ -237,7 +233,7 @@ def detect_voice_expression():
                 update_patient_voice_expressions(emotion)
             should_classify_voice = False
 
-def detect_emotion(frameCount):
+def detect_face_expression(frameCount):
     # grab global references to the video stream, output frame, and
     # lock variables
     global vs, outputFrame,  patient, ontology_lock
@@ -327,7 +323,7 @@ if __name__ == '__main__':
     init_ontology()
 
     # start face emotion detection thread
-    face_thread = threading.Thread(target=detect_emotion, args=(args["frame_count"],))
+    face_thread = threading.Thread(target=detect_face_expression, args=(args["frame_count"],))
     face_thread.daemon = True
     face_thread.start()
     # start voice emotion detection thread
