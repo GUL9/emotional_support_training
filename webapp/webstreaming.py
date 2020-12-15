@@ -45,6 +45,7 @@ VOICE_MODEL = pickle.load(open("speechRecognition/result/mlp_classifier.model", 
 
 PATH_TO_SOUND_FILE = "sound/soundfile.wav"
 should_classify_voice = False
+should_classify_face = False
 # Time intervals
 DEFAULT_TIME_INTERVAL = 5000
 MAX_TIME_INTERVAL = 30000
@@ -187,9 +188,10 @@ def update_user_interaction_interval(input_type):
 
 @ app.route("/")
 def index():
-    global patient, user, should_classify_voice, ontology_lock
+    global patient, user, should_classify_voice, should_classify_face, ontology_lock
     # return the rendered template
     should_classify_voice = True
+    should_classify_face = True
     with ontology_lock:
         emojis = generate_emoji_list()
         #emojis = []
@@ -223,7 +225,7 @@ def detect_voice_expression():
         if should_classify_voice:
             # Record to file until nex interval
             with ontology_lock:
-                record_time = user.has_preference_to_interact_with_interval.in_seconds/1000 - 1
+                record_time = user.has_preference_to_interact_with_interval.in_seconds/1000 - 0.2
             test.record_to_file(PATH_TO_SOUND_FILE, record_time)
             features = utils.extract_feature(PATH_TO_SOUND_FILE, mfcc=True, chroma=True, mel=True).reshape(1, -1)
             emotion = str(VOICE_MODEL.predict(features)[0])
@@ -250,16 +252,22 @@ def detect_face_expression(frameCount):
     # loop over frames from the video stream
     while True:
         # Our operations on the current output frame come here
-        result = DeepFace.analyze(
-            outputFrame, actions=['emotion'], enforce_detection=False)
-
-        result = {key:value for (key,value) in result['emotion'].items() if key in active_emotions}
+        # Get current user interaction interval time
+        with ontology_lock:
+            accumulation_time = user.has_preference_to_interact_with_interval.in_seconds/1000 - 0.2
+        stop_time = time.time() + accumulation_time
+        # Accumulate emotion scores until next interaction
+        accumulation = DeepFace.analyze(outputFrame, actions=['emotion'], enforce_detection=False)['emotion']
+        while time.time() < stop_time:
+            result = DeepFace.analyze(outputFrame, actions=['emotion'], enforce_detection=False)['emotion']
+            for emotion in result.keys():
+                accumulation[emotion] += result[emotion]
+        # Update facial expression with the emotion with highest score during the accumulation time
+        result = {key:value for (key,value) in accumulation.items() if key in active_emotions}
         emotion = max(result, key=lambda emotion: result[emotion])
         print("Face: " + emotion)
         with ontology_lock:
             update_patient_facial_expressions(emotion)
-            #update_patient_voice_expressions(emotion)
-
 
 def generate():
     # grab global references to the output frame and lock variables
