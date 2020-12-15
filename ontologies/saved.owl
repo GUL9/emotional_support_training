@@ -327,12 +327,12 @@
 
 <Emotion rdf:about="#emotion1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">none</type_of_emotion>
+  <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sad</type_of_emotion>
 </Emotion>
 
 <Emotion rdf:about="#emotion2">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">none</type_of_emotion>
+  <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sad</type_of_emotion>
 </Emotion>
 
 <Patient rdf:about="#patient1">
@@ -344,7 +344,7 @@
 
 <Time rdf:about="#time1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <in_seconds rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</in_seconds>
+  <in_seconds rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</in_seconds>
 </Time>
 
 <User rdf:about="#user1">
@@ -354,6 +354,7 @@
 
 <Emoji rdf:about="#emoji1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#HappyEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">😊</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">happy</type_of_emotion>
   <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
@@ -361,6 +362,7 @@
 
 <Emoji rdf:about="#emoji2">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#HappyEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">😃</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">happy</type_of_emotion>
   <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
@@ -368,6 +370,7 @@
 
 <Emoji rdf:about="#emoji3">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#HappyEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">😄</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">happy</type_of_emotion>
   <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
@@ -375,13 +378,15 @@
 
 <Emoji rdf:about="#emoji4">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#HappyEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">😁</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">happy</type_of_emotion>
-  <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
+  <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</usage_frequency>
 </Emoji>
 
 <Emoji rdf:about="#emoji5">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#HappyEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">😆</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">happy</type_of_emotion>
   <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
@@ -389,6 +394,7 @@
 
 <Emoji rdf:about="#emoji6">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#HappyEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">😉</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">happy</type_of_emotion>
   <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
@@ -396,6 +402,7 @@
 
 <Emoji rdf:about="#emoji7">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#AngryEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">😤</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">angry</type_of_emotion>
   <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
@@ -403,6 +410,7 @@
 
 <Emoji rdf:about="#emoji8">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#AngryEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">😠</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">angry</type_of_emotion>
   <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
@@ -410,6 +418,7 @@
 
 <Emoji rdf:about="#emoji9">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#AngryEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">😡</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">angry</type_of_emotion>
   <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
@@ -417,6 +426,7 @@
 
 <Emoji rdf:about="#emoji10">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#AngryEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">🤬</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">angry</type_of_emotion>
   <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
@@ -424,6 +434,7 @@
 
 <Emoji rdf:about="#emoji11">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#AngryEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">😒</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">angry</type_of_emotion>
   <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
@@ -431,6 +442,7 @@
 
 <Emoji rdf:about="#emoji12">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#AngryEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">😣</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">angry</type_of_emotion>
   <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
@@ -438,13 +450,15 @@
 
 <Emoji rdf:about="#emoji13">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#SadEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">☹️</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sad</type_of_emotion>
-  <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
+  <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</usage_frequency>
 </Emoji>
 
 <Emoji rdf:about="#emoji14">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#SadEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">😢</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sad</type_of_emotion>
   <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
@@ -452,13 +466,15 @@
 
 <Emoji rdf:about="#emoji15">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#SadEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">😭</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sad</type_of_emotion>
-  <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
+  <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</usage_frequency>
 </Emoji>
 
 <Emoji rdf:about="#emoji16">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#SadEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">😟</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sad</type_of_emotion>
   <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
@@ -466,6 +482,7 @@
 
 <Emoji rdf:about="#emoji17">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#SadEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">😥</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sad</type_of_emotion>
   <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
@@ -473,6 +490,7 @@
 
 <Emoji rdf:about="#emoji18">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#NeutralEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">🙂</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">neutral</type_of_emotion>
   <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
@@ -480,6 +498,7 @@
 
 <Emoji rdf:about="#emoji19">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#NeutralEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">😐</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">neutral</type_of_emotion>
   <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
@@ -487,16 +506,18 @@
 
 <Emoji rdf:about="#emoji20">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#NeutralEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">🧐</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">neutral</type_of_emotion>
-  <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
+  <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</usage_frequency>
 </Emoji>
 
 <Emoji rdf:about="#emoji21">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#NeutralEmoji"/>
   <type_of_emoji rdf:datatype="http://www.w3.org/2001/XMLSchema#string">😑</type_of_emoji>
   <type_of_emotion rdf:datatype="http://www.w3.org/2001/XMLSchema#string">neutral</type_of_emotion>
-  <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</usage_frequency>
+  <usage_frequency rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</usage_frequency>
 </Emoji>
 
 

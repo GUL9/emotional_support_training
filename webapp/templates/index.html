@@ -18,11 +18,10 @@
     <div class="overlay-voice">Voice {{emosh}}</div>
     <div class="overlay-bar">
       {% for em in emoji %}
-      <form id="test" method="POST" value="{{loop.index}}"> {{em}} </form>
+      <form id="test" method="POST" value="{{em}}"> {{em}} </form>
       {% endfor %}
     </div>
   </div>
-  <a href="/response">Refresh</a>
 
   <script type=text/javascript>
             $(function() {

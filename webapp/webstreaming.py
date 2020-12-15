@@ -22,8 +22,7 @@ from owlready2 import *
 # initialize the output frame and a lock used to ensure thread-safe
 # exchanges of the output frames (useful when multiple browsers/tabs
 # are viewing the stream)
-time_interval = 10
-start_time = 0
+
 outputFrame = None
 lock = threading.Lock()
 # initialize a flask object
@@ -33,45 +32,15 @@ app = Flask(__name__)
 # vs = VideoStream(usePiCamera=1).start()
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
+
 active_emotions = ['happy', 'neutral', 'angry', 'sad']
-emotion = 'neutral'
-dictgraphic = {
+active_emojis = {
                'happy': ['😊', '😃', '😄', '😁', '😆', '😉'],
                'angry': ['😤', '😠', '😡', '🤬', '😒', '😣'],
                'sad': ['☹️', '😢', '😭', '😟', '😥'],
                'neutral': ['🙂', '😐', '🧐', '😑'],
                }
-counter = {'🙃': 0,
-           '😊': 0,
-           '😃': 0,
-           '😄': 0,
-           '😁': 0,
-           '😆': 0,
-           '😉': 0,
-           '😤': 0,
-           '😠': 0,
-           '😡': 0,
-           '🤬': 0,
-           '😒': 0,
-           '😣': 0,
-           '☹️': 0,
-           '😢': 0,
-           '😭': 0,
-           '😟': 0,
-           '😥': 0,
-           '🙂': 0,
-           '😐': 0,
-           '🧐': 0,
-           '😑': 0,
-           '🤢': 0,
-           '🤮': 0,
-           '😣': 0,
-           '😖': 0,
-           '😨': 0,
-           '😰': 0,
-           '😥': 0,
-           '😓': 0,
-           '😱': 0}
+
 ontology = None
 patient = None
 user = None
@@ -92,8 +61,8 @@ def init_ontology():
             has_preference_to_interact_with_interval=ontology.Time(in_seconds=10)
         )
         # init Emojis
-        for emotion_type in dictgraphic.keys():
-            for emoji_type in dictgraphic[emotion_type]:
+        for emotion_type in active_emojis.keys():
+            for emoji_type in active_emojis[emotion_type]:
                 ontology.Emoji(type_of_emotion=emotion_type, type_of_emoji=emoji_type, usage_frequency=0)
         # Reason
         ontology.save("../ontologies/saved.owl")
@@ -165,9 +134,9 @@ def update_emoji_frequency(emoji_type):
     global ontology
     with ontology:
         for emoji in ontology.Emoji.instances():
-            if emoji.type_of_emoji == emoji_type:
+            if emoji.type_of_emoji in emoji_type:
                 emoji.usage_frequency += 1
-                print(emoji.usage_frequency)
+                print("Usage Frequency for" + emoji_type +  str(emoji.usage_frequency))
                 #ontology.save("../ontologies/saved.owl")
                 #sync_reasoner()
 
@@ -185,7 +154,7 @@ def update_user_interaction_interval():
 @ app.route("/")
 def index():
     print("index")
-    global emotion, dictgraphic, start_time, time_interval, patient
+    global patient
     # return the rendered template
     with lock:
         emojis = generate_emoji_list()
@@ -209,7 +178,7 @@ def detect_emotion(frameCount):
 
     # grab global references to the video stream, output frame, and
     # lock variables
-    global vs, outputFrame, emotion, patient, onto
+    global vs, outputFrame,  patient
 
     with lock:
         # check if the output frame is available, otherwise skip
@@ -237,7 +206,7 @@ def generate():
     print("generate")
 
     # grab global references to the output frame and lock variables
-    global outputFrame, lock, time_interval, start_time
+    global outputFrame, lock
 
     # loop over frames from the output stream
     while True:
@@ -266,14 +235,6 @@ def video_feed():
     # type (mime type)
     return Response(generate(),
                     mimetype="multipart/x-mixed-replace; boundary=frame")
-
-
-@ app.route('/response')
-def response():
-    print("response")
-
-    global emotion, dictgraphic, time_interval
-    return render_template("index.html", emosh=emotion, emoji=sorted(dictgraphic[emotion], key=counter.get, reverse=True), interval=time_interval)
 
 
 # check to see if this is the main thread of execution
