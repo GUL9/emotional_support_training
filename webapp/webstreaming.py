@@ -45,7 +45,8 @@ active_emojis = {
     'neutral': ['🙂', '😐', '🧐', '😑', '🧑', '👩'],
 }
 
-VOICE_MODEL = pickle.load(open("speechRecognition/result/mlp_classifier.model", "rb"))
+VOICE_MODEL = pickle.load(
+    open("speechRecognition/result/mlp_classifier.model", "rb"))
 PATH_TO_ONTOLOGY = "ontologies/ontology.owl"
 PATH_TO_SAVE_REASONED_ONTOLOGY = "ontologies/saved.owl"
 
@@ -55,13 +56,13 @@ should_classify_face = False
 # Time intervals
 DEFAULT_TIME_INTERVAL = 5000
 MAX_TIME_INTERVAL = 30000
-MIN_TIME_INTERVAL =3000
+MIN_TIME_INTERVAL = 3000
 DISMISS_TIME_CHANGE = 5000
 EMOJI_TIME_CHANGE = 1000
 # User actions
 EMOJI = "emoji"
 DISMISS = "dismiss"
-active_user_actions =[EMOJI, DISMISS]
+active_user_actions = [EMOJI, DISMISS]
 # Emotions
 NEUTRAL = "neutral"
 HAPPY = "happy"
@@ -69,15 +70,16 @@ ANGRY = "angry"
 SAD = "sad"
 active_emotions = [NEUTRAL, HAPPY, ANGRY, SAD]
 active_emojis = {
-               HAPPY: ['😊', '😃', '😄', '😁', '😆', '😉'],
-               ANGRY: ['😤', '😠', '😡', '🤬', '😒', '😣'],
-               SAD: ['☹️', '😢', '😭', '😟', '😥'],
-               NEUTRAL: ['🙂', '😐', '🧐', '😑'],
-               }
+    HAPPY: ['😊', '😃', '😄', '😁', '😆', '😉'],
+    ANGRY: ['😤', '😠', '😡', '🤬', '😒', '😣'],
+    SAD: ['☹️', '😢', '😭', '😟', '😥'],
+    NEUTRAL: ['🙂', '😐', '🧐', '😑'],
+}
 # Ontology globals
 ontology = None
 patient = None
 user = None
+
 
 def init_ontology():
     global ontology, patient, user
@@ -90,7 +92,8 @@ def init_ontology():
             has_voice_expression=ontology.Emotion(type_of_emotion=NEUTRAL)
         )
         # init User: default time interval
-        user = ontology.User(has_preference_to_interact_with_interval=ontology.Time(in_seconds=DEFAULT_TIME_INTERVAL))
+        user = ontology.User(has_preference_to_interact_with_interval=ontology.Time(
+            in_seconds=DEFAULT_TIME_INTERVAL))
         # init Emojis: corresponding emotion type and 0 frequency
         for emotion_type in active_emojis.keys():
             for emoji_type in active_emojis[emotion_type]:
@@ -110,6 +113,7 @@ def update_patient_facial_expressions(facial_expression):
             sync_reasoner()
             ontology.save("ontologies/saved.owl")
 
+
 def update_patient_voice_expressions(voice_expression):
     # Update if expression has changed; reason if updated
     global ontology, patient
@@ -118,6 +122,7 @@ def update_patient_voice_expressions(voice_expression):
             patient.has_voice_expression.type_of_emotion = voice_expression
             sync_reasoner()
             ontology.save("ontologies/saved.owl")
+
 
 def get_emoji_from_emotion(emotion):
     # Returns list of all Emoji-instances for given emotion
@@ -140,11 +145,12 @@ def generate_emoji_list():
     with ontology:
         facial_expression = patient.has_facial_expression.type_of_emotion
         voice_expression = patient.has_voice_expression.type_of_emotion
-        #Get all emojis of corresponding expressions
+        # Get all emojis of corresponding expressions
         face_emojis = get_emoji_from_emotion(facial_expression)
         voice_emojis = get_emoji_from_emotion(voice_expression)
 
         emojis = []
+
         def sort_frequency(emoji):
             if emoji.usage_frequency != None:
                 return emoji.usage_frequency
@@ -174,7 +180,8 @@ def update_emoji_frequency(emoji_type):
         for emoji in ontology.Emoji.instances():
             if emoji.type_of_emoji in emoji_type:
                 emoji.usage_frequency += 1
-                print("Usage Frequency for" + emoji_type +  str(emoji.usage_frequency))
+                # print("Usage Frequency for" + emoji_type +
+                #       str(emoji.usage_frequency))
                 sync_reasoner()
                 ontology.save("ontologies/saved.owl")
 
@@ -192,8 +199,8 @@ def update_user_interaction_interval(input_type):
 
     sync_reasoner()
     ontology.save("ontologies/saved.owl")
-    print("Current time interval: " + str(user.has_preference_to_interact_with_interval.in_seconds))
-
+    # print("Current time interval: " +
+    #       str(user.has_preference_to_interact_with_interval.in_seconds))
 
 
 @ app.route("/")
@@ -203,10 +210,10 @@ def index():
     with ontology_lock:
         emojis = generate_emoji_list()
     return render_template("index.html",
-           face=patient.has_facial_expression.type_of_emotion,
-           voice=patient.has_voice_expression.type_of_emotion,
-           emojis=emojis,
-           interval=user.has_preference_to_interact_with_interval.in_seconds)
+                           face=patient.has_facial_expression.type_of_emotion,
+                           voice=patient.has_voice_expression.type_of_emotion,
+                           emojis=emojis,
+                           interval=user.has_preference_to_interact_with_interval.in_seconds)
 
 
 @ app.route('/count', methods=['POST'])
@@ -215,7 +222,6 @@ def count():
     with ontology:
         update_emoji_frequency(emoji)
         update_user_interaction_interval(EMOJI)
-
     return ('', 200)
 
 
@@ -226,20 +232,22 @@ def dismiss():
         update_user_interaction_interval(DISMISS)
     return ('', 200)
 
+
 def detect_voice_expression():
     global user, ontology_lock
     while True:
-            # Record to file until nex interval
-            print("Starting voice classification")
-            with ontology_lock:
-                record_time = user.has_preference_to_interact_with_interval.in_seconds/1000 - 0.2
-            test.record_to_file(PATH_TO_SOUND_FILE, record_time)
-            features = utils.extract_feature(PATH_TO_SOUND_FILE, mfcc=True, chroma=True, mel=True).reshape(1, -1)
-            emotion = str(VOICE_MODEL.predict(features)[0])
-            print("Voice: " + emotion)
+        # Record to file until nex interval
+        # print("Starting voice classification")
+        with ontology_lock:
+            record_time = user.has_preference_to_interact_with_interval.in_seconds/1000 - 0.2
+        test.record_to_file(PATH_TO_SOUND_FILE, record_time)
+        features = utils.extract_feature(
+            PATH_TO_SOUND_FILE, mfcc=True, chroma=True, mel=True).reshape(1, -1)
+        emotion = str(VOICE_MODEL.predict(features)[0])
+        # print("Voice: " + emotion)
 
-            with ontology_lock:
-                update_patient_voice_expressions(emotion)
+        with ontology_lock:
+            update_patient_voice_expressions(emotion)
 
 
 def detect_face_expression(frameCount):
@@ -263,17 +271,20 @@ def detect_face_expression(frameCount):
         with ontology_lock:
             accumulation_time = user.has_preference_to_interact_with_interval.in_seconds/1000 - 0.2
         stop_time = time.time() + accumulation_time
-        print("Starting face classification")
+        # print("Starting face classification")
         # Accumulate emotion scores until next interaction
-        accumulation = DeepFace.analyze(outputFrame, actions=['emotion'], enforce_detection=False)['emotion']
+        accumulation = DeepFace.analyze(
+            outputFrame, actions=['emotion'], enforce_detection=False)['emotion']
         while time.time() < stop_time:
-            result = DeepFace.analyze(outputFrame, actions=['emotion'], enforce_detection=False)['emotion']
+            result = DeepFace.analyze(outputFrame, actions=[
+                                      'emotion'], enforce_detection=False)['emotion']
             for emotion in result.keys():
                 accumulation[emotion] += result[emotion]
         # Update facial expression with the emotion with highest score during the accumulation time
-        result = {key:value for (key,value) in accumulation.items() if key in active_emotions}
+        result = {key: value for (
+            key, value) in accumulation.items() if key in active_emotions}
         emotion = max(result, key=lambda emotion: result[emotion])
-        print("Face: " + emotion)
+        # print("Face: " + emotion)
         with ontology_lock:
             update_patient_facial_expressions(emotion)
 
@@ -301,6 +312,7 @@ def generate():
         # yield the output frame in the byte format
         yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' +
               bytearray(encodedImage) + b'\r\n')
+
 
 @app.route('/_update', methods=['GET'])
 def stuff():
@@ -352,7 +364,8 @@ if __name__ == '__main__':
     init_ontology()
 
     # start face emotion detection thread
-    face_thread = threading.Thread(target=detect_face_expression, args=(args["frame_count"],))
+    face_thread = threading.Thread(
+        target=detect_face_expression, args=(args["frame_count"],))
     face_thread.daemon = True
     face_thread.start()
     # start voice emotion detection thread
