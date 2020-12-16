@@ -18,13 +18,14 @@
     <img src="{{ url_for('video_feed') }}" class="image" />
 
     <div id="overlay">
-      <div class="overlay">Face: <p id=emosh>{{emosh}}</p>
+      <div class="overlay">Face: <p id=face>{{face}}</p>
       </div>
-      <div class="overlay-voice">Voice: <p id=emosh>{{emosh}}</p>
+      <div class="overlay-voice">Voice: <p id=voice>{{voice}}</p>
       </div>
+
       <button class="btn" id="dismiss" method="POST">Dismiss</button>
       <div class=" overlay-bar" id="emoji">
-        {% set emoji_global = emoji %}
+        {% set emoji_global = emojis %}
         {% for em in emoji_global %}
         <form id="vote" method="POST" value="{{loop.index}}"> {{em}} </form>
         {% endfor %}
@@ -38,7 +39,6 @@
   </div>
   <div class="buttonHolder">
     <input onclick="update_overlay() " type="button" value="Refresh" id=refresh style="display:inline-block;">
-    <input onclick="show()" type="button" value="Show" id=show style="display:none;">
   </div>
 
   <script type='text/javascript'>
@@ -158,7 +158,6 @@
       });
     });
   </script>
-
 
 </body>
 

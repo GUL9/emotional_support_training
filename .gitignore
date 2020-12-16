@@ -201,5 +201,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# ontology stuff 
+# ontology stuff
 */saved.owl
+
+# soundfiles
+*/soundfile.wav
