@@ -42,7 +42,7 @@
     var globalTimeInt;
   </script>
   <script type=text/javascript>
-    function update_overlay() {
+    function update_overlay(select=0) {
             $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
             $.getJSON($SCRIPT_ROOT+"/_update",
                 function(data) {
@@ -50,11 +50,15 @@
                   $("#face").html(data.face)
                   $("#voice").html(data.voice)
                   
-                  // update emoji bar
-                  $('form#vote').each(function(index){
-                    $(this).html(data.emojis[index])
-                  })
-
+                  // if select event
+                  if(select===1){
+                    // emoji bar updated already
+                  } else {
+                    // update emoji bar
+                    $('form#vote').each(function(index){
+                      $(this).html(data.emojis[index])
+                    })
+                  }
                   if (globalTimeInt !== null) {
                     clearTimeout(globalTimeInt);
                   }
@@ -72,16 +76,23 @@
   <script type=text/javascript>
             $(function() {
               $('body').on('click' , 'form#vote',function(e) {
-                e.preventDefault()
+                e.preventDefault();
+                $('form#vote').each(function(index){
+                      if(index !== 0){
+                        $(this).html('')
+                      } else {
+                        $(this).html(e.target.innerHTML)
+                      }
+                    });
                 $.ajax({
                         type: 'POST',
                         url: '/count',
                         data: {'data': e.target.innerHTML},
                         success: function() {
-                          update_overlay(); 
+                          update_overlay(1);
                         },
                         error: function() {
-                            alert("Oops! Something went wrong.");
+                          alert("Oops! Something went wrong.");
                         }
                 });
                 return false;
