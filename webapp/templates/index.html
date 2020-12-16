@@ -33,7 +33,8 @@
 
   </div>
   <div>
-    <p id=interval style="font-size: 10; font-style: italic; color: gray;">current interval: {{interval}}</p>
+    <p id=interval style="font-size: 10; font-style: italic; color: gray;">current interval in seconds:
+      {{interval}}/1000</p>
   </div>
   <div class="buttonHolder">
     <input onclick="update_overlay() " type="button" value="Refresh" id=refresh style="display:inline-block;">
@@ -41,69 +42,92 @@
   </div>
 
   <script type='text/javascript'>
-    var globalTimeInt;
+    var globalTimeInt = null;
   </script>
   <script type=text/javascript>
-    function update_overlay() {
-            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-            $.getJSON($SCRIPT_ROOT+"/_update",
-                function(data) {
-                  data_emojis = data.emoji;
-                  $("#emosh").html(data.emosh)
-                  
-                  // update emoji bar
-                  $('form#vote').each(function(index){
-                    $(this).html(data.emoji[index])
-                  })
-
-                  if (globalTimeInt !== null) {
-                    clearTimeout(globalTimeInt);
-                  }
-                  $("#interval").text("current interval: "+data.interval)
-                  globalTimeInt = setTimeout(update_overlay, parseInt(data.interval));
-                });   
+  function show() {
+        var button = document.getElementById('show');
+        var refresh_button = document.getElementById('refresh');
+        var x = document.getElementById('overlay');
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+        if (button.style.display === "none") {
+          button.style.display = 'inline-block'
+        } else {
+          button.style.display = 'none'
+        }
+        refresh_button.style.display = 'inline-block'
+      }
+</script>
+  <script type=text/javascript>
+    function update_overlay(select = 0, dismiss = 0) {
+      if (globalTimeInt !== null) {
+        clearTimeout(globalTimeInt);
+      };
+      if (select !== 0){
+        // update emoji bar
+        $('form#vote').each(function(index){
+          if (index == 0){
+            $(this).html(select)
+          }else {
+            $(this).html('')
+          }
+        });
+      };
+      
+      $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+      $.getJSON($SCRIPT_ROOT+"/_update",
+          function(data) {
+            if (dismiss === 0 && select === 0){
+              data_emojis = data.emoji;
+              $("#emosh").html(data.emosh)
+            
+              // update emoji bar
+              $('form#vote').each(function(index){
+                $(this).html(data.emoji[index])
+                //console.log(data.emoji[index])
+              })
+            }
+            if (globalTimeInt !== null) {
+              clearTimeout(globalTimeInt);
+            }
+            $("#interval").text("current interval in seconds: "+data.interval/1000)
+            globalTimeInt = setTimeout(update_overlay, parseInt(data.interval));
+          });
     }
-  </script>
-  <script>
-    // initiate regular overlay update
-    update_overlay();
+
+    update_overlay()
   </script>
 
   <script type=text/javascript>
-            $(function() {
-              $('body').on('click' , 'form#vote',function(e) {
-                e.preventDefault()
-                $.ajax({
-                        type: 'POST',
-                        url: '/count',
-                        data: {'data': e.target.innerHTML},
-                        success: function() {
-                          update_overlay(); 
-                        },
-                        error: function() {
-                            alert("Oops! Something went wrong.");
-                        }
-                });
-                return false;
-              });
-              
-            });
+    $(function() {
+      $('body').on('click' , 'form#vote',function(e) {
+        e.preventDefault()
+        $.ajax({
+                type: 'POST',
+                url: '/count',
+                data: {'data': e.target.innerHTML},
+                success: function() {
+                  update_overlay(select=e.target.innerHTML, 0);
+                  console.log('message delivered to ontology');
+                },
+                error: function() {
+                  alert("Oops! Something went wrong.");
+                }
+        });
+        return false;
+      });
+      
+    });
   </script>
+
   <script type=text/javascript>
     $(function() {
       $('body').on('click', 'button#dismiss',function(e) {
         e.preventDefault()
-        $.ajax({
-                type: 'POST',
-                url: '/dismiss',
-                data: 'nothing',
-                success: function() {
-                    
-                },
-                error: function() {
-                    alert("Oops! Something went wrong.");
-                }
-        });
         var button = document.getElementById('show');
         var refresh_button = document.getElementById('refresh');
         var x = document.getElementById('overlay');
@@ -118,30 +142,24 @@
           button.style.display = 'none'
         }
         refresh_button.style.display = 'none';
-
+        $.ajax({
+                type: 'POST',
+                url: '/dismiss',
+                data: 'nothing',
+                success: function() {
+                    update_overlay(0,1);
+                    console.log('success with dismiss!')
+                },
+                error: function() {
+                    alert("Oops! Something went wrong.");
+                }
+        });
         return false;
       });
     });
   </script>
 
-  <script type=text/javascript>
-    function show() {
-          var button = document.getElementById('show');
-          var refresh_button = document.getElementById('refresh');
-          var x = document.getElementById('overlay');
-          if (x.style.display === "none") {
-            x.style.display = "block";
-          } else {
-            x.style.display = "none";
-          }
-          if (button.style.display === "none") {
-            button.style.display = 'inline-block'
-          } else {
-            button.style.display = 'none'
-          }
-          refresh_button.style.display = 'inline-block'
-        }
-  </script>
+
 </body>
 
 </html>

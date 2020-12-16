@@ -184,7 +184,7 @@ def dismiss():
 
 
 @app.route('/_update', methods=['GET'])
-def stuff():
+def update():
     global patient, user
     with lock:
         emojis = generate_emoji_list()
