@@ -39,6 +39,7 @@
   </div>
   <div class="buttonHolder">
     <input onclick="update_overlay() " type="button" value="Refresh" id=refresh style="display:inline-block;">
+    <input onclick="show()" type="button" value="Show" id=show style="display:none;">
   </div>
 
   <script type='text/javascript'>
@@ -82,12 +83,11 @@
       $.getJSON($SCRIPT_ROOT+"/_update",
           function(data) {
             if (dismiss === 0 && select === 0){
-              data_emojis = data.emoji;
               $("#emosh").html(data.emosh)
             
               // update emoji bar
               $('form#vote').each(function(index){
-                $(this).html(data.emoji[index])
+                $(this).html(data.emojis[index])
                 //console.log(data.emoji[index])
               })
             }

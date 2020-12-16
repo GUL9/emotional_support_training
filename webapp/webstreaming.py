@@ -37,13 +37,13 @@ vs = VideoStream(src=0).start()
 time.sleep(2.0)
 
 time_interval = 5000
-active_emotions = ['happy', 'neutral', 'angry', 'sad']
-active_emojis = {
-    'happy': ['😊', '😃', '😄', '😁', '😆', '😉'],
-    'angry': ['😤', '😠', '😡', '🤬', '😒', '😣'],
-    'sad': ['😔', '😢', '😭', '😟', '😥', '🥺'],
-    'neutral': ['🙂', '😐', '🧐', '😑', '🧑', '👩'],
-}
+# active_emotions = ['happy', 'neutral', 'angry', 'sad']
+# active_emojis = {
+#     'happy': ['😊', '😃', '😄', '😁', '😆', '😉'],
+#     'angry': ['😤', '😠', '😡', '🤬', '😒', '😣'],
+#     'sad': ['😔', '😢', '😭', '😟', '😥', '🥺'],
+#     'neutral': ['🙂', '😐', '🧐', '😑', '🧑', '👩'],
+# }
 
 VOICE_MODEL = pickle.load(
     open("speechRecognition/result/mlp_classifier.model", "rb"))
@@ -72,8 +72,8 @@ active_emotions = [NEUTRAL, HAPPY, ANGRY, SAD]
 active_emojis = {
     HAPPY: ['😊', '😃', '😄', '😁', '😆', '😉'],
     ANGRY: ['😤', '😠', '😡', '🤬', '😒', '😣'],
-    SAD: ['☹️', '😢', '😭', '😟', '😥'],
-    NEUTRAL: ['🙂', '😐', '🧐', '😑'],
+    SAD: ['😔', '😢', '😭', '😟', '😥', '🥺'],
+    NEUTRAL: ['🙂', '😐', '🧐', '😑', '🧑', '👩'],
 }
 # Ontology globals
 ontology = None
@@ -319,7 +319,6 @@ def update():
     global patient, user, ontology_lock
     with ontology_lock:
         emojis = generate_emoji_list()
-
     return jsonify(face=patient.has_facial_expression.type_of_emotion,
                    voice=patient.has_voice_expression.type_of_emotion,
                    emojis=emojis,
