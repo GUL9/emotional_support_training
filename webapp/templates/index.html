@@ -47,6 +47,7 @@
   </script>
   <script type=text/javascript>
   function show() {
+        //#TODO: refactor into better method
         var button = document.getElementById('show');
         var refresh_button = document.getElementById('refresh');
         var x = document.getElementById('overlay');
@@ -91,6 +92,16 @@
                 $(this).html(data.emojis[index])
                 //console.log(data.emoji[index])
               })
+
+              // if overlay is hidde, show. #TODO: refactor into independent method
+              var x = document.getElementById('overlay');
+              var button = document.getElementById('show');
+              var refresh_button = document.getElementById('refresh');
+              if (x.style.display === "none") {
+                x.style.display = 'block';
+                button.style.display = 'none';
+                refresh_button.style.display = 'inline-block';
+              }
             }
             if (globalTimeInt !== null) {
               clearTimeout(globalTimeInt);
