@@ -83,8 +83,9 @@
       $.getJSON($SCRIPT_ROOT+"/_update",
           function(data) {
             if (dismiss === 0 && select === 0){
-              $("#emosh").html(data.emosh)
-            
+              $("#face").html(data.face)
+              $("#voice").html(data.voice)
+
               // update emoji bar
               $('form#vote').each(function(index){
                 $(this).html(data.emojis[index])
