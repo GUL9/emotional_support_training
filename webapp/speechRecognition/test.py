@@ -8,7 +8,7 @@ from array import array
 from struct import pack
 from sklearn.neural_network import MLPClassifier
 
-from speechRecognition.utils import extract_feature
+from utils import extract_feature
 
 THRESHOLD = 500
 CHUNK_SIZE = 1024

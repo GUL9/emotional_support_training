@@ -14,11 +14,19 @@ import random
 import atexit
 import owlready2
 from owlready2 import *
-
-
+import pyaudio
+import os
+import wave
 import pickle
-import speechRecognition.test as test
-import speechRecognition.utils as utils
+import time
+from sys import byteorder
+from array import array
+from struct import pack
+from sklearn.neural_network import MLPClassifier
+
+# import pickle
+# import speechRecognition.test as test
+# import speechRecognition.utils as utils
 
 # initialize the output frame and a lock used to ensure thread-safe
 # exchanges of the output frames (useful when multiple browsers/tabs
@@ -37,13 +45,6 @@ vs = VideoStream(src=0).start()
 time.sleep(2.0)
 
 time_interval = 5000
-# active_emotions = ['happy', 'neutral', 'angry', 'sad']
-# active_emojis = {
-#     'happy': ['😊', '😃', '😄', '😁', '😆', '😉'],
-#     'angry': ['😤', '😠', '😡', '🤬', '😒', '😣'],
-#     'sad': ['😔', '😢', '😭', '😟', '😥', '🥺'],
-#     'neutral': ['🙂', '😐', '🧐', '😑', '🧑', '👩'],
-# }
 
 VOICE_MODEL = pickle.load(
     open("speechRecognition/result/mlp_classifier.model", "rb"))
@@ -350,21 +351,22 @@ def add_header(r):
 if __name__ == '__main__':
     # construct the argument parser and parse command line arguments
 
-    ap = argparse.ArgumentParser()
-    ap.add_argument("-i", "--ip", type=str, required=True,
-                    help="ip address of the device")
-    ap.add_argument("-o", "--port", type=int, required=True,
-                    help="ephemeral port number of the server (1024 to 65535)")
-    ap.add_argument("-f", "--frame-count", type=int, default=32,
-                    help="# of frames used to construct the background model")
-    args = vars(ap.parse_args())
+    # ap = argparse.ArgumentParser()
+    # ap.add_argument("-i", "--ip", type=str, required=True,
+    #                 help="ip address of the device")
+    # ap.add_argument("-o", "--port", type=int, required=True,
+    #                 help="ephemeral port number of the server (1024 to 65535)")
+    # ap.add_argument("-f", "--frame-count", type=int, default=32,
+    #                 help="# of frames used to construct the background model")
+    # args = vars(ap.parse_args())
+    
 
     # read and init the ontology
     init_ontology()
 
     # start face emotion detection thread
     face_thread = threading.Thread(
-        target=detect_face_expression, args=(args["frame_count"],))
+        target=detect_face_expression, args=(32,))
     face_thread.daemon = True
     face_thread.start()
     # start voice emotion detection thread
@@ -372,9 +374,13 @@ if __name__ == '__main__':
     voice_thread.daemon = True
     voice_thread.start()
 
+    # # start the flask app
+    # app.run(host=args["ip"], port=args["port"], debug=True,
+    #         threaded=True, use_reloader=False)
+    
     # start the flask app
-    app.run(host=args["ip"], port=args["port"], debug=True,
+    app.run(host='0.0.0.0', port='8000', debug=True,
             threaded=True, use_reloader=False)
-
+    
 # release the video stream pointer
 vs.stop()

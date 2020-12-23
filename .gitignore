@@ -206,3 +206,6 @@ dmypy.json
 
 # soundfiles
 */soundfile.wav
+
+#mac
+*.DS_Store
