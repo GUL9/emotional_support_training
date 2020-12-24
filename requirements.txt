@@ -14,14 +14,3 @@ matplotlib==3.3.3
 numpy==1.19.4
 opencv-python==4.4.0.46
 Owlready2==0.26
-pandas==1.1.5
-Pillow==8.0.1
-scikit-image==0.18.0
-scikit-learn==0.23.2
-scikit-neuralnetwork==0.7
-scipy==1.5.4
-sklearn==0.0
-tensorboard==2.4.0
-tensorboard-plugin-wit==1.7.0
-tensorflow==2.4.0
-tensorflow-estimator==2.4.0
