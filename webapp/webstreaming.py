@@ -24,9 +24,9 @@ from array import array
 from struct import pack
 from sklearn.neural_network import MLPClassifier
 
-import pickle
-import speechRecognition.test as test
-import speechRecognition.utils as utils
+# import pickle
+# import speechRecognition.test as test
+# import speechRecognition.utils as utils
 
 # initialize the output frame and a lock used to ensure thread-safe
 # exchanges of the output frames (useful when multiple browsers/tabs
@@ -46,12 +46,12 @@ time.sleep(2.0)
 
 time_interval = 5000
 
-VOICE_MODEL = pickle.load(
-    open("speechRecognition/result/mlp_classifier.model", "rb"))
+# VOICE_MODEL = pickle.load(
+#     open("speechRecognition/result/mlp_classifier.model", "rb"))
 PATH_TO_ONTOLOGY = "ontologies/ontology.owl"
 PATH_TO_SAVE_REASONED_ONTOLOGY = "ontologies/saved.owl"
 
-PATH_TO_SOUND_FILE = "sound/soundfile.wav"
+#PATH_TO_SOUND_FILE = "sound/soundfile.wav"
 should_classify_voice = False
 should_classify_face = False
 # Time intervals
@@ -115,14 +115,14 @@ def update_patient_facial_expressions(facial_expression):
             ontology.save("ontologies/saved.owl")
 
 
-def update_patient_voice_expressions(voice_expression):
-    # Update if expression has changed; reason if updated
-    global ontology, patient
-    with ontology:
-        if patient.has_voice_expression.type_of_emotion != voice_expression:
-            patient.has_voice_expression.type_of_emotion = voice_expression
-            sync_reasoner()
-            ontology.save("ontologies/saved.owl")
+# def update_patient_voice_expressions(voice_expression):
+#     # Update if expression has changed; reason if updated
+#     global ontology, patient
+#     with ontology:
+#         if patient.has_voice_expression.type_of_emotion != voice_expression:
+#             patient.has_voice_expression.type_of_emotion = voice_expression
+#             sync_reasoner()
+#             ontology.save("ontologies/saved.owl")
 
 
 def get_emoji_from_emotion(emotion):
@@ -145,10 +145,10 @@ def generate_emoji_list():
     global ontology, patient
     with ontology:
         facial_expression = patient.has_facial_expression.type_of_emotion
-        voice_expression = patient.has_voice_expression.type_of_emotion
+        #voice_expression = patient.has_voice_expression.type_of_emotion
         # Get all emojis of corresponding expressions
         face_emojis = get_emoji_from_emotion(facial_expression)
-        voice_emojis = get_emoji_from_emotion(voice_expression)
+        #voice_emojis = get_emoji_from_emotion(voice_expression)
 
         emojis = []
 
@@ -157,19 +157,19 @@ def generate_emoji_list():
                 return emoji.usage_frequency
             return 0
         # When expressions differ; pick 2 from each
-        if facial_expression != voice_expression:
-            face_emojis.sort(key=sort_frequency, reverse=True)
-            voice_emojis.sort(key=sort_frequency, reverse=True)
-            frequent_emojis = face_emojis[:2]+voice_emojis[:2]
-            frequent_emojis.sort(key=sort_frequency, reverse=True)
-            for emoji in frequent_emojis:
-                emojis.append(emoji.type_of_emoji)
-        # When expressions are the same; pick 4 from one
-        else:
-            face_emojis.sort(key=sort_frequency, reverse=True)
-            frequent_emojis = face_emojis[:4]
-            for emoji in frequent_emojis:
-                emojis.append(emoji.type_of_emoji)
+        # if facial_expression != voice_expression:
+        #     face_emojis.sort(key=sort_frequency, reverse=True)
+        #     voice_emojis.sort(key=sort_frequency, reverse=True)
+        #     frequent_emojis = face_emojis[:2]+voice_emojis[:2]
+        #     frequent_emojis.sort(key=sort_frequency, reverse=True)
+        #     for emoji in frequent_emojis:
+        #         emojis.append(emoji.type_of_emoji)
+        # # When expressions are the same; pick 4 from one
+        # else:
+        face_emojis.sort(key=sort_frequency, reverse=True)
+        frequent_emojis = face_emojis[:4]
+        for emoji in frequent_emojis:
+            emojis.append(emoji.type_of_emoji)
 
         return emojis
 
@@ -234,21 +234,21 @@ def dismiss():
     return ('', 200)
 
 
-def detect_voice_expression():
-    global user, ontology_lock
-    while True:
-        # Record to file until nex interval
-        # print("Starting voice classification")
-        with ontology_lock:
-            record_time = user.has_preference_to_interact_with_interval.in_seconds/1000 - 0.2
-        test.record_to_file(PATH_TO_SOUND_FILE, record_time)
-        features = utils.extract_feature(
-            PATH_TO_SOUND_FILE, mfcc=True, chroma=True, mel=True).reshape(1, -1)
-        emotion = str(VOICE_MODEL.predict(features)[0])
-        # print("Voice: " + emotion)
+# def detect_voice_expression():
+#     global user, ontology_lock
+#     while True:
+#         # Record to file until nex interval
+#         # print("Starting voice classification")
+#         with ontology_lock:
+#             record_time = user.has_preference_to_interact_with_interval.in_seconds/1000 - 0.2
+#         test.record_to_file(PATH_TO_SOUND_FILE, record_time)
+#         features = utils.extract_feature(
+#             PATH_TO_SOUND_FILE, mfcc=True, chroma=True, mel=True).reshape(1, -1)
+#         emotion = str(VOICE_MODEL.predict(features)[0])
+#         # print("Voice: " + emotion)
 
-        with ontology_lock:
-            update_patient_voice_expressions(emotion)
+#         with ontology_lock:
+#             update_patient_voice_expressions(emotion)
 
 
 def detect_face_expression(frameCount):
@@ -369,10 +369,10 @@ if __name__ == '__main__':
         target=detect_face_expression, args=(32,))
     face_thread.daemon = True
     face_thread.start()
-    # start voice emotion detection thread
-    voice_thread = threading.Thread(target=detect_voice_expression)
-    voice_thread.daemon = True
-    voice_thread.start()
+    # # start voice emotion detection thread
+    # voice_thread = threading.Thread(target=detect_voice_expression)
+    # voice_thread.daemon = True
+    # voice_thread.start()
 
     # # start the flask app
     # app.run(host=args["ip"], port=args["port"], debug=True,
