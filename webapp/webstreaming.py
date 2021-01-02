@@ -4,29 +4,12 @@
 from imutils.video import VideoStream
 from flask import Response, Flask, render_template, request, redirect, url_for, jsonify
 import threading
-import argparse
-import datetime
 import imutils
-import time
 import cv2
 from deepface import DeepFace
-import random
-import atexit
 import owlready2
 from owlready2 import *
-import pyaudio
-import os
-import wave
-import pickle
-import time
-from sys import byteorder
-from array import array
-from struct import pack
-from sklearn.neural_network import MLPClassifier
 
-# import pickle
-# import speechRecognition.test as test
-# import speechRecognition.utils as utils
 
 # initialize the output frame and a lock used to ensure thread-safe
 # exchanges of the output frames (useful when multiple browsers/tabs
