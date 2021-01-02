@@ -1,6 +1,4 @@
-runtime: custom
-env: flex
-
+runtime: python37
 resources:
     cpu: 2
     memory_gb: 4.0
