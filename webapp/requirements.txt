@@ -1,0 +1,13 @@
+deepface
+Flask==1.1.2
+gunicorn==20.0.4
+imutils==0.5.3
+numpy==1.19.3
+opencv-python==4.4.0.46
+Owlready2==0.26
+tensorflow==2.0.0
+keras==2.3.1
+librosa==0.6.3
+soundfile==0.9.0
+sklearn
+pyaudio==0.2.11

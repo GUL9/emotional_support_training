@@ -1,17 +1,13 @@
-# base code from Adrian Rosebrock's tutorial on Motion Detection: https://www.pyimagesearch.com/2019/09/02/opencv-stream-video-to-web-browser-html-page/
+# webstreaming base code from Adrian Rosebrock's tutorial on Motion Detection: https://www.pyimagesearch.com/2019/09/02/opencv-stream-video-to-web-browser-html-page/
 
 # import the necessary packages
 from imutils.video import VideoStream
-from flask import Response, Flask, render_template, request, redirect, url_for, jsonify
+from flask import Response, Flask, render_template, request, jsonify
 import threading
-import argparse
-import datetime
 import imutils
 import time
 import cv2
 from deepface import DeepFace
-import random
-import atexit
 import owlready2
 from owlready2 import *
 
@@ -30,6 +26,7 @@ lock = threading.Lock()
 ontology_lock = threading.Lock()
 # initialize a flask object
 app = Flask(__name__)
+
 # initialize the video stream and allow the camera sensor to
 # warmup for 2 seconds
 # vs = VideoStream(usePiCamera=1).start()
@@ -37,13 +34,6 @@ vs = VideoStream(src=0).start()
 time.sleep(2.0)
 
 time_interval = 5000
-# active_emotions = ['happy', 'neutral', 'angry', 'sad']
-# active_emojis = {
-#     'happy': ['😊', '😃', '😄', '😁', '😆', '😉'],
-#     'angry': ['😤', '😠', '😡', '🤬', '😒', '😣'],
-#     'sad': ['😔', '😢', '😭', '😟', '😥', '🥺'],
-#     'neutral': ['🙂', '😐', '🧐', '😑', '🧑', '👩'],
-# }
 
 VOICE_MODEL = pickle.load(
     open("speechRecognition/result/mlp_classifier.model", "rb"))
@@ -348,32 +338,22 @@ def add_header(r):
 
 # check to see if this is the main thread of execution
 if __name__ == '__main__':
-    # construct the argument parser and parse command line arguments
-
-    ap = argparse.ArgumentParser()
-    ap.add_argument("-i", "--ip", type=str, required=True,
-                    help="ip address of the device")
-    ap.add_argument("-o", "--port", type=int, required=True,
-                    help="ephemeral port number of the server (1024 to 65535)")
-    ap.add_argument("-f", "--frame-count", type=int, default=32,
-                    help="# of frames used to construct the background model")
-    args = vars(ap.parse_args())
-
     # read and init the ontology
     init_ontology()
 
     # start face emotion detection thread
     face_thread = threading.Thread(
-        target=detect_face_expression, args=(args["frame_count"],))
+        target=detect_face_expression, args=(32,))
     face_thread.daemon = True
     face_thread.start()
+
     # start voice emotion detection thread
     voice_thread = threading.Thread(target=detect_voice_expression)
     voice_thread.daemon = True
     voice_thread.start()
 
     # start the flask app
-    app.run(host=args["ip"], port=args["port"], debug=True,
+    app.run(host='0.0.0.0', port='8000', debug=True,
             threaded=True, use_reloader=False)
 
 # release the video stream pointer
