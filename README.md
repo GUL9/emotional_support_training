@@ -1,4 +1,5 @@
 # 👩🏼‍⚕️ CERT 👨🏼‍⚕️
+
 ## Caregivers Emotional Recognition Training
 
 The ability to recognise patients’ emotions and respond appropriately is a critical skill for caregivers to have and regularly refine. Acquiring this ability is not easy - it can be especially challenging considering patients undergoing treatment may express emotion in highly variable ways.
@@ -49,5 +50,5 @@ Visit http://localhost:8000/ on preferred browser to view and interact with demo
 
 This is an experimental version of the system and runs on alpha versions of external libraries and will not be maintained. It is not recommended to be used for any purpose outside of testing and exploration. This repo is for demonstration purposes only.
 
-Make sure to give webcam permissions - no video data is captured during program execution
-Make sure to give mic permisions - audio data _is_ saved locally in the the "sound" directory titled "soundfile.wav" but is not stored in any external database - the file will be locally stored and can be manually removed.
+Make sure to give webcam permissions - no video data is captured during program execution.
+Make sure to also give mic permisions - audio data _is_ saved locally in the the "sound" directory titled "soundfile.wav" but is not stored in any external database - the file will be locally stored and can be manually removed.
