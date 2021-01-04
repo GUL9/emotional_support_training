@@ -34,18 +34,20 @@ This image demonstrates how each module of the system is integrated.
 
 
 # Demo Requirements 💻
-Make sure you have python and pip installed
+
+Make sure to have python v3.7 and pip installed in order to run
 
 ```pip install -r requirements.txt```
 
-Launch the service via commandline
+On a Windows machine, ```pip install pyaudio``` will fail. Instead, ```pip install pipwin``` and then ```pipwin install pyaudio``` to download the package.
 
-```python emotion-webstream.py```
+change directories ```cd webapp``` and launch the service via commandline ```python emotion-webstream.py```
 
-Visit http://localhost:8000/ on your preferred browser to view and interact with demo
+Visit http://localhost:8000/ on preferred browser to view and interact with demo
 
 ## Disclaimer ⚠️
 
-Make sure to give webcam permissions - no video data is captured during program execution
-Make sure to give mic permisions - audio data _is_ saved locally in the the "sound" directory titled "soundfile.wav"
+This is an experimental version of the system and runs on alpha versions of external libraries and will not be maintained. It is not recommended to be used for any purpose outside of testing and exploration. The purpose of this repo is for demonstration purposes only.
 
+Make sure to give webcam permissions - no video data is captured during program execution
+Make sure to give mic permisions - audio data _is_ saved locally in the the "sound" directory titled "soundfile.wav" but is not stored in any external database - the file will be locally stored and can be manually removed.
